@@ -13,7 +13,7 @@ fi
 fuser -n tcp 8080 -k
 
 nohup ./server.py > tmp/log.txt 2> tmp/log.txt < /dev/null &
-echo $! > server.pid
+echo $! > tmp/server.pid
 
 echo "\n\n------------------------------------------\n\n"
 
