@@ -1,7 +1,20 @@
+git status
+
+echo "\n\n------------------------------------------\n\n"
+
 git reset HEAD --hard
 git checkout master
 git pull origin master
 
-kill `cat tmp/server.pid`
-nohup ./server.py > tmp/out.log 2> tmp/out.err < /dev/null &
+if [ -f tmp/server.pid ]
+then
+ kill `cat tmp/server.pid`
+fi
+fuser -n tcp 8080 -k
+
+nohup ./server.py > tmp/log.txt 2> tmp/log.txt < /dev/null &
 echo $! > server.pid
+
+echo "\n\n------------------------------------------\n\n"
+
+git status
