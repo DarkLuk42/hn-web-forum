@@ -1,0 +1,82 @@
+{
+  "MA1": {
+    "bezeichnung": "Mathematik 1",
+    "studiengang": "Bachelor Informatik dual",
+    "semester": 1
+  },
+  "TGI1": {
+    "bezeichnung": "Tech.Grundl.d.Informatik 1",
+    "studiengang": "Bachelor Informatik dual",
+    "semester": 1
+  },
+  "EPR": {
+    "bezeichnung": "Einführung Programmierung",
+    "studiengang": "Bachelor Informatik dual",
+    "semester": 1
+  },
+  "BWL": {
+    "bezeichnung": "Grundl.Betriebswirtschaft",
+    "studiengang": "Bachelor Informatik dual",
+    "semester": 3
+  },
+  "ENG": {
+    "bezeichnung": "Einführung Programmierung",
+    "studiengang": "Bachelor Informatik dual",
+    "semester": 1
+  },
+  "MA2": {
+    "bezeichnung": "Mathematik 2",
+    "studiengang": "Bachelor Informatik dual",
+    "semester": 2
+  },
+  "TGI2": {
+    "bezeichnung": "Tech.Grundl.d.Informatik2",
+    "studiengang": "Bachelor Informatik dual",
+    "semester": 2
+  },
+  "ALD": {
+    "bezeichnung": "Algorith.u.Datenstrukture",
+    "studiengang": "Bachelor Informatik dual",
+    "semester": 4
+  },
+  "BSY": {
+    "bezeichnung": "Betriebssysteme",
+    "studiengang": "Bachelor Informatik dual",
+    "semester": 4
+  },
+  "OOA": {
+    "bezeichnung": "Obj.orien.Anwendungsentw.",
+    "studiengang": "Bachelor Informatik dual",
+    "semester": 2
+  },
+  "MAR": {
+    "bezeichnung": "Grundlagen des Marketing ",
+    "studiengang": "Bachelor Informatik dual",
+    "semester": 4
+  },
+  "STA": {
+    "bezeichnung": "Statistik",
+    "studiengang": "Bachelor Informatik dual",
+    "semester": 3
+  },
+  "GRA": {
+    "bezeichnung": "Grafische DV/Bildverarb.",
+    "studiengang": "Bachelor Informatik dual",
+    "semester": 3
+  },
+  "WPS": {
+    "bezeichnung": "WP Seminarmodul",
+    "studiengang": "Bachelor Informatik dual",
+    "semester": 4
+  },
+  "PRO": {
+    "bezeichnung": "Projektmanagement",
+    "studiengang": "Bachelor Informatik dual",
+    "semester": 4
+  },
+  "WEB": {
+    "bezeichnung": "Web-Engeneering",
+    "studiengang": "Bachelor Informatik dual",
+    "semester": 5
+  }
+}
