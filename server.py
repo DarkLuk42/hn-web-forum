@@ -22,7 +22,6 @@ def main():
             'tools.staticdir.root': current_dir,
             'tools.staticdir.on': True,
             'tools.staticdir.dir': './content',
-            'tools.staticdir.index': 'index.html'
         }
     }
     # Mount static content handler

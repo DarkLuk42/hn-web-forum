@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Forum</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1>Forum</h1>
+        <p>Themenliste:</p>
+        <table border = 1 id="themen">
+            <th>
+                Themen
+            </th>
+            %for thema in liste:
+                <tr>
+                    <td>
+                        <li><a href = "disc?id=${thema}">${liste[thema]["thema"]}</a></li>
+                    </td>
+                </tr>
+            %endfor
+        </table>
+    <a href = "disc">Diskussionen</a>
+    </body>
+</html>
