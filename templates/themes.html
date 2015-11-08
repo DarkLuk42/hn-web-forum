@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Forum</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1>Forum</h1>
+        <p>Themen:</p>
+        <ul>
+            %for theme in themes:
+                <li>
+                    <a href="/${theme}">${themes[theme]["name"]}</a>
+                    <ul>
+                        %for discussion in themes[theme]["discussions"]:
+                            <li><a href="/${theme}/${discussion}">${themes[theme]["discussions"][discussion]["title"]}</a></li>
+                        %endfor
+                    </ul>
+                </li>
+            %endfor
+        </ul>
+    </body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Forum</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1>Forum</h1>
+        <p>Benutzer:</p>
+        <ul>
+            %for user in users:
+                <li><a href="/${user}">${users[user]["name"]} (${users[user]["role"]})</a></li>
+            %endfor
+        </ul>
+    </body>
+</html>

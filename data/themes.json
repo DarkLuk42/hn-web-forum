@@ -1,0 +1,29 @@
+{
+  "thema-1": {
+    "name": "Thema 1",
+    "discussions": {
+      "ist-php-wirklich-so-doof": {
+        "title": "Ist PHP wirklich so doof?",
+        "articles": {
+          "nein": {
+              "title": "Nein",
+              "content": "PHP ist voll toll! :)",
+              "owner": "luk",
+              "timestamp": 123456789
+          },
+          "nein2": {
+              "title": "Nein",
+              "content": "PHP ist wirklich voll toll! :)",
+              "owner": "luk",
+              "timestamp": 123456789
+          }
+        }
+      }
+    }
+  },
+  "thema-2":
+  {
+    "name": "Thema 2",
+    "discussions": {}
+  }
+}
