@@ -20,8 +20,16 @@ class Repository:
     def __init__(self):
         with open("data/themes.json") as themes_file:
             self.themes = json.load(themes_file)
+            for theme in self.themes:
+                self.themes[theme]["alias"] = theme
+                for discussion in self.themes[theme]["discussions"]:
+                    self.themes[theme]["discussions"][discussion]["alias"] = discussion
+                    for article in self.themes[theme]["discussions"][discussion]["articles"]:
+                        self.themes[theme]["discussions"][discussion]["articles"][article]["alias"] = article
         with open("data/users.json") as users_file:
             self.users = json.load(users_file)
+            for user in self.users:
+                self.users[user]["alias"] = user
 
     def get_themes(self):
         return self.themes
@@ -48,13 +56,17 @@ class Repository:
         try:
             return self.users[user]
         except:
-            msg_s = "Theme " + str(user) + " not found!"
+            msg_s = "User " + str(user) + " not found!"
             raise cherrypy.HTTPError(404, msg_s)
 
 
 def render_template(template_name, *args, **data):
     lookup = TemplateLookup(directories=[current_dir + '/templates'])
     template = lookup.get_template(template_name + ".html")
+    try:
+        data["user"] = cherrypy.session["user"]
+    except:
+        data["user"] = None
     return template.render(*args, **data)
 
 
@@ -68,13 +80,13 @@ class Application(object):
 
     def theme(self, theme):
         obj_theme = self.repository.find_theme(theme)
-        return render_template("theme", obj_theme=obj_theme, theme=theme)
+        return render_template("theme", theme=obj_theme)
     theme.exposed = False
 
     def discussion(self, theme, discussion):
         obj_theme = self.repository.find_theme(theme)
         obj_discussion = self.repository.find_discussion(theme, discussion)
-        return render_template("discussion", obj_theme=obj_theme, theme=theme, obj_discussion=obj_discussion, discussion=discussion)
+        return render_template("discussion", theme=obj_theme, discussion=obj_discussion)
     discussion.exposed = False
 
     def themes(self):
@@ -84,6 +96,19 @@ class Application(object):
     def users(self):
         return render_template("users", users=self.repository.get_users())
     users.exposed = True
+
+    def login(self, **kwargs):
+        if "user" in kwargs:
+            user = self.repository.find_user(kwargs["user"])
+            if "password" in kwargs and user["password"] == kwargs["password"]:
+                cherrypy.session["user"] = user
+        raise cherrypy.HTTPRedirect("/")
+    login.exposed = True
+
+    def logout(self):
+        cherrypy.session["user"] = None
+        raise cherrypy.HTTPRedirect("/")
+    logout.exposed = True
 
     def default(self, *arglist, **kwargs):
         arglist = list(filter(None, arglist))

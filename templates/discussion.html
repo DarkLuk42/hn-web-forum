@@ -4,17 +4,17 @@
 <%block name="content">
     <h1>Forum</h1>
     <p>
-        <a href="/${theme}">${obj_theme["name"]}</a>
+        <a href="/${theme['alias']}">${theme["name"]}</a>
         ->
-        <a href="/${theme}/${discussion}">${obj_discussion["title"]}</a>:
+        <a href="/${theme['alias']}/${discussion['alias']}">${discussion["title"]}</a>:
     </p>
     <ul>
-        %for article in obj_discussion["articles"]:
+        %for article in discussion["articles"]:
             <li>
-                ${obj_discussion["articles"][article]["title"]}
-                ${obj_discussion["articles"][article]["content"]}
-                ${obj_discussion["articles"][article]["owner"]}
-                ${obj_discussion["articles"][article]["timestamp"]}
+                ${discussion["articles"][article]["title"]}
+                ${discussion["articles"][article]["content"]}
+                ${discussion["articles"][article]["owner"]}
+                ${discussion["articles"][article]["timestamp"]}
             </li>
         %endfor
     </ul>

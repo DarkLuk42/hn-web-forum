@@ -22,6 +22,10 @@ def main():
             'tools.staticdir.root': current_dir,
             'tools.staticdir.on': True,
             'tools.staticdir.dir': './content',
+            'tools.sessions.on': True,
+            'tools.sessions.storage_type': "File",
+            'tools.sessions.storage_path': './data/sessions',
+            'tools.sessions.timeout': 10
         }
     }
     # Mount static content handler

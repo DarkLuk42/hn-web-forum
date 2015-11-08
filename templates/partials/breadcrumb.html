@@ -1,0 +1,9 @@
+<ul>
+    <li><a href="/">Startseite</a></li>
+    %if theme:
+        <li><a href="${theme['alias']}">${theme['name']}</a></li>
+        %if discussion:
+            <li><a href="${discussion['alias']}">${discussion['title']}</a></li>
+        %endif
+    %endif
+</ul>

@@ -3,10 +3,10 @@
 <%block name="title">Forum</%block>
 <%block name="content">
     <h1>Forum</h1>
-    <p><a href="/${theme}">${obj_theme["name"]}</a>:</p>
+    <p><a href="/${theme['alias']}">${theme["name"]}</a>:</p>
     <ul>
-        %for discussion in obj_theme["discussions"]:
-            <li><a href="/${theme}/${discussion}">${obj_theme["discussions"][discussion]["title"]}</a></li>
+        %for discussion in theme["discussions"]:
+            <li><a href="/${theme['alias']}/${discussion}">${theme["discussions"][discussion]["title"]}</a></li>
         %endfor
     </ul>
 </%block>
