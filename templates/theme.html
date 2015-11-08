@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Forum</title>
-        <meta charset="UTF-8" />
-    </head>
-    <body>
-        <h1>Forum</h1>
-        <p><a href="/${theme}">${obj_theme["name"]}</a>:</p>
-        <ul>
-            %for discussion in obj_theme["discussions"]:
-                <li><a href="/${theme}/${discussion}">${obj_theme["discussions"][discussion]["title"]}</a></li>
-            %endfor
-        </ul>
-    </body>
-</html>
+<%inherit file="layout/default.html"/>
+
+<%block name="title">Forum</%block>
+<%block name="content">
+    <h1>Forum</h1>
+    <p><a href="/${theme}">${obj_theme["name"]}</a>:</p>
+    <ul>
+        %for discussion in obj_theme["discussions"]:
+            <li><a href="/${theme}/${discussion}">${obj_theme["discussions"][discussion]["title"]}</a></li>
+        %endfor
+    </ul>
+</%block>

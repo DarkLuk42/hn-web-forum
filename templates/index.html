@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Forum</title>
-        <meta charset="UTF-8" />
-    </head>
-    <body>
-        <h1>Forum</h1>
-        <p>Themen:</p>
-        <ul>
-            %for theme in themes:
-                <li><a href="/${theme}">${themes[theme]["name"]}</a></li>
-            %endfor
-        </ul>
-    </body>
-</html>
+<%inherit file="layout/default.html"/>
+
+<%block name="title">Forum</%block>
+<%block name="content">
+    <h1>Forum</h1>
+    <p>Themen:</p>
+    <ul>
+        %for theme in themes:
+            <li><a href="/${theme}">${themes[theme]["name"]}</a></li>
+        %endfor
+    </ul>
+</%block>

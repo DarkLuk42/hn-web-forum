@@ -3,6 +3,7 @@ import os
 import cherrypy
 import json
 import collections
+from mako.lookup import TemplateLookup
 from mako.template import Template
 strict_undefined = True
 from pprint import pprint
@@ -51,40 +52,41 @@ class Repository:
             raise cherrypy.HTTPError(404, msg_s)
 
 
+def render_template(template_name, *args, **data):
+    lookup = TemplateLookup(directories=[current_dir + '/templates'])
+    template = lookup.get_template(template_name + ".html")
+    return template.render(*args, **data)
+
+
 class Application(object):
     def __init__(self):
         self.repository = Repository()
 
     def index(self):
-        myTemplate = Template(filename="templates/index.html")
-        return myTemplate.render(themes=self.repository.get_themes())
+        return render_template("index", themes=self.repository.get_themes())
     index.exposed = True
 
     def theme(self, theme):
         obj_theme = self.repository.find_theme(theme)
-        myTemplate = Template(filename="templates/theme.html")
-        return myTemplate.render(obj_theme=obj_theme, theme=theme)
+        return render_template("theme", obj_theme=obj_theme, theme=theme)
     theme.exposed = False
 
     def discussion(self, theme, discussion):
         obj_theme = self.repository.find_theme(theme)
         obj_discussion = self.repository.find_discussion(theme, discussion)
-        myTemplate = Template(filename="templates/discussion.html")
-        return myTemplate.render(obj_theme=obj_theme, theme=theme, obj_discussion=obj_discussion, discussion=discussion)
+        return render_template("discussion", obj_theme=obj_theme, theme=theme, obj_discussion=obj_discussion, discussion=discussion)
     discussion.exposed = False
 
     def themes(self):
-        myTemplate = Template(filename="templates/themes.html")
-        return myTemplate.render(themes=self.repository.get_themes())
+        return render_template("themes", themes=self.repository.get_themes())
     themes.exposed = True
 
     def users(self):
-        myTemplate = Template(filename="templates/users.html")
-        return myTemplate.render(users=self.repository.get_users())
+        return render_template("users", users=self.repository.get_users())
     users.exposed = True
 
     def default(self, *arglist, **kwargs):
-        arglist = filter(None, arglist)
+        arglist = list(filter(None, arglist))
         if len(arglist) == 1:
             return self.theme(arglist[0])
         if len(arglist) == 2:
