@@ -1,3 +1,4 @@
+# coding: utf-8
 <%inherit file="layout/default.html"/>
 
 <%block name="title">Forum</%block>
@@ -6,7 +7,9 @@
     <p><a href="/${theme['alias']}">${theme["name"]}</a>:</p>
     <ul>
         %for discussion in theme["discussions"]:
-            <li><a href="/${theme['alias']}/${discussion}">${theme["discussions"][discussion]["title"]}</a></li>
+            %if theme["discussions"][discussion]["truncated"] == False:
+                <li><a href="/${theme['alias']}/${discussion}">${theme["discussions"][discussion]["title"]}</a></li>
+            %endif
         %endfor
     </ul>
 </%block>

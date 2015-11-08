@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # coding: utf-8
 
 import os
@@ -25,7 +25,9 @@ def main():
             'tools.sessions.on': True,
             'tools.sessions.storage_type': "File",
             'tools.sessions.storage_path': './data/sessions',
-            'tools.sessions.timeout': 10
+            'tools.sessions.timeout': 10,
+            'tools.encode.on': True,
+            'tools.encode.encoding': "utf-8"
         }
     }
     # Mount static content handler

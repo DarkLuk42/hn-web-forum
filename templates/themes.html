@@ -1,3 +1,4 @@
+# coding: utf-8
 <%inherit file="layout/default.html"/>
 
 <%block name="title">Forum</%block>
@@ -15,10 +16,15 @@
                             <ul>
                                 %for article in themes[theme]["discussions"][discussion]["articles"]:
                                     <li>
-                                        ${themes[theme]["discussions"][discussion]["articles"][article]["title"]}
-                                        ${themes[theme]["discussions"][discussion]["articles"][article]["content"]}
-                                        ${themes[theme]["discussions"][discussion]["articles"][article]["owner"]}
-                                        ${themes[theme]["discussions"][discussion]["articles"][article]["timestamp"]}
+                                        %if themes[theme]["discussions"][discussion]["articles"][article]["truncated"] == False:
+                                            ${themes[theme]["discussions"][discussion]["articles"][article]["title"]}
+                                            ${themes[theme]["discussions"][discussion]["articles"][article]["content"]}
+                                            ${themes[theme]["discussions"][discussion]["articles"][article]["owner"]}
+                                            ${themes[theme]["discussions"][discussion]["articles"][article]["timestamp"]}
+                                        %endif
+                                        %if themes[theme]["discussions"][discussion]["articles"][article]["truncated"] == True:
+                                            ...gelöscht...
+                                        %endif
                                     </li>
                                 %endfor
                             </ul>

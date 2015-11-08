@@ -3,21 +3,36 @@
     "name": "Thema 1",
     "discussions": {
       "ist-php-wirklich-so-doof": {
+        "truncated": false,
         "title": "Ist PHP wirklich so doof?",
         "articles": {
           "nein": {
+              "truncated": false,
               "title": "Nein",
               "content": "PHP ist voll toll! :)",
               "owner": "luk",
               "timestamp": 123456789
           },
           "nein2": {
+              "truncated": false,
               "title": "Nein",
               "content": "PHP ist wirklich voll toll! :)",
               "owner": "luk",
               "timestamp": 123456789
+          },
+          "ja": {
+              "truncated": true,
+              "title": "Ja!",
+              "content": "PHP ist voll der dreck!!!",
+              "owner": "luk",
+              "timestamp": 123456789
           }
         }
+      },
+      "geloescht": {
+        "truncated": true,
+        "title": "Diese Diskussion ist gelöscht.",
+        "articles": { }
       }
     }
   },

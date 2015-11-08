@@ -15,6 +15,7 @@
 ```
 {
 	alias: "php",
+	truncated: false,
 	title: "PHP",
 	articles: [
 		...
@@ -26,6 +27,7 @@
 ```
 {
 	alias: "php",
+	truncated: false,
 	title: "PHP",
 	content: "PHP ist voll toll! :)",
 	owner: "luk",
@@ -37,6 +39,7 @@
 ```
 {
 	alias: "luk",
+	truncated: false,
 	name: "Lukas",
 	password: "012345",
 	role: "ADMIN"

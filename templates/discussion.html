@@ -1,3 +1,4 @@
+# coding: utf-8
 <%inherit file="layout/default.html"/>
 
 <%block name="title">Forum</%block>
@@ -11,10 +12,15 @@
     <ul>
         %for article in discussion["articles"]:
             <li>
-                ${discussion["articles"][article]["title"]}
-                ${discussion["articles"][article]["content"]}
-                ${discussion["articles"][article]["owner"]}
-                ${discussion["articles"][article]["timestamp"]}
+                %if discussion["articles"][article]["truncated"] == False:
+                    ${discussion["articles"][article]["title"]}
+                    ${discussion["articles"][article]["content"]}
+                    ${discussion["articles"][article]["owner"]}
+                    ${discussion["articles"][article]["timestamp"]}
+                %endif
+                %if discussion["articles"][article]["truncated"] == True:
+                    ...gelöscht...
+                %endif
             </li>
         %endfor
     </ul>

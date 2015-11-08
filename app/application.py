@@ -1,12 +1,10 @@
 # coding: utf-8
 import os
+import unicodedata
 import cherrypy
 import json
-import collections
 from mako.lookup import TemplateLookup
-from mako.template import Template
 strict_undefined = True
-from pprint import pprint
 
 
 try:
@@ -38,7 +36,7 @@ class Repository:
         try:
             return self.themes[theme]
         except:
-            msg_s = "Theme " + str(theme) + " not found!"
+            msg_s = "Thema '" + str(theme) + "' wurde nicht gefunden!"
             raise cherrypy.HTTPError(404, msg_s)
 
     def find_discussion(self, theme, discussion):
@@ -46,7 +44,7 @@ class Repository:
         try:
             return theme["discussions"][discussion]
         except:
-            msg_s = "Discussion " + str(discussion) + " not found!"
+            msg_s = "Diskussion '" + str(discussion) + "' wurde nicht gefunden!"
             raise cherrypy.HTTPError(404, msg_s)
 
     def get_users(self):
@@ -56,23 +54,34 @@ class Repository:
         try:
             return self.users[user]
         except:
-            msg_s = "User " + str(user) + " not found!"
+            msg_s = "Benutzer '" + str(user) + "' wurde nicht gefunden!"
             raise cherrypy.HTTPError(404, msg_s)
 
 
 def render_template(template_name, *args, **data):
-    lookup = TemplateLookup(directories=[current_dir + '/templates'])
+    lookup = TemplateLookup(directories=[current_dir + '/templates'], input_encoding='utf-8', output_encoding='utf-8',
+                            encoding_errors='replace')
     template = lookup.get_template(template_name + ".html")
     try:
         data["user"] = cherrypy.session["user"]
     except:
         data["user"] = None
-    return template.render(*args, **data)
+    try:
+        data["message"] = cherrypy.session["message"]
+        cherrypy.session["message"] = None
+    except:
+        data["message"] = None
+    return template.render_unicode(*args, **data)
 
 
 class Application(object):
     def __init__(self):
         self.repository = Repository()
+
+    @staticmethod
+    def redirect(path, message):
+        cherrypy.session["message"] = message
+        raise cherrypy.HTTPRedirect(path)
 
     def index(self):
         return render_template("index", themes=self.repository.get_themes())
@@ -86,6 +95,8 @@ class Application(object):
     def discussion(self, theme, discussion):
         obj_theme = self.repository.find_theme(theme)
         obj_discussion = self.repository.find_discussion(theme, discussion)
+        if obj_discussion["truncated"]:
+            Application.redirect("/" + theme, u"Die Diskussion wurde gelöscht.")
         return render_template("discussion", theme=obj_theme, discussion=obj_discussion)
     discussion.exposed = False
 
@@ -102,12 +113,13 @@ class Application(object):
             user = self.repository.find_user(kwargs["user"])
             if "password" in kwargs and user["password"] == kwargs["password"]:
                 cherrypy.session["user"] = user
-        raise cherrypy.HTTPRedirect("/")
+                Application.redirect("/", "Du hast dich erfolgreich eingeloggt!")
+        Application.redirect("/", "Der login ist fehlgeschlagen!")
     login.exposed = True
 
     def logout(self):
         cherrypy.session["user"] = None
-        raise cherrypy.HTTPRedirect("/")
+        Application.redirect("/", "Du hast dich erfolgreich ausgeloggt!")
     logout.exposed = True
 
     def default(self, *arglist, **kwargs):
