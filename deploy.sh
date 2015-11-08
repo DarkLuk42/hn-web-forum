@@ -2,7 +2,7 @@ git status
 
 echo "\n\n------------------------------------------\n\n"
 
-git reset HEAD --hard
+#git reset HEAD --hard
 git checkout master
 git pull origin master
 
