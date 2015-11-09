@@ -32,7 +32,7 @@ def get_alias(name, **data):
             if alias+str(i) not in data:
                 alias += str(i)
                 break
-            i+=1
+            i += 1
 
     return alias
 
@@ -79,7 +79,6 @@ class Repository:
             self.themes[theme]["discussions"] = OrderedDict(sorted(
                 self.themes[theme]["discussions"].items(),
                 key=sort_discussions))
-
 
     def get_themes(self):
         return self.themes
