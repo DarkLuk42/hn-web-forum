@@ -1,6 +1,6 @@
 # DB-Structure
 
-##Theme
+## Theme
 ```
 {
 	alias: "php",
@@ -11,7 +11,7 @@
 }
 ```
 
-##Discussion
+## Discussion
 ```
 {
 	alias: "php",
@@ -23,7 +23,7 @@
 }
 ```
 
-##Article
+## Article
 ```
 {
 	alias: "php",
@@ -35,7 +35,7 @@
 }
 ```
 
-##User
+## User
 ```
 {
 	alias: "luk",
