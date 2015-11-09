@@ -1,13 +1,16 @@
 # coding: utf-8
 <%inherit file="layout/default.html"/>
 
-<%block name="title">Forum</%block>
+<%block name="title">Startseite</%block>
 <%block name="content">
-    <h1>Forum</h1>
-    <p>Themen:</p>
+    <h1>Themen</h1>
     <ul>
         %for theme in themes:
-            <li><a href="/${theme}">${themes[theme]["name"]}</a></li>
+            <li><a href="/${theme}">${themes[theme]["name"]|h}</a></li>
         %endfor
     </ul>
+    <form action="/create_theme" method="post">
+        <input type="text" name="name"/>
+        <input type="submit" value="Thema anlegen"/>
+    </form>
 </%block>

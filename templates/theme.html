@@ -1,15 +1,21 @@
 # coding: utf-8
 <%inherit file="layout/default.html"/>
 
-<%block name="title">Forum</%block>
+<%block name="title">${theme["name"]}</%block>
 <%block name="content">
-    <h1>Forum</h1>
-    <p><a href="/${theme['alias']}">${theme["name"]}</a>:</p>
+    <h1>${theme["name"]}</h1>
     <ul>
         %for discussion in theme["discussions"]:
             %if theme["discussions"][discussion]["truncated"] == False:
-                <li><a href="/${theme['alias']}/${discussion}">${theme["discussions"][discussion]["title"]}</a></li>
+                <li><a href="/${theme['alias']}/${discussion}">${theme["discussions"][discussion]["title"]|h}</a></li>
             %endif
         %endfor
     </ul>
+    <form action="/create_discussion" method="post">
+        <input type="hidden" name="theme" value="${theme['alias']}">
+        <input type="text" name="title" placeholder="Titel"/>
+        <input type="text" name="article_title" placeholder="Beitrag"/>
+        <textarea name="article_content" placeholder="Inhalt"></textarea>
+        <input type="submit" value="Diskussion starten"/>
+    </form>
 </%block>
