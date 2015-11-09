@@ -5,6 +5,7 @@ import cherrypy
 import json
 from mako.lookup import TemplateLookup
 from collections import OrderedDict
+from datetime import datetime
 import time
 strict_undefined = True
 
@@ -220,6 +221,12 @@ class Repository:
             json.dump(self.users, users_file, sort_keys=True, indent=2)
 
 
+def format_time(timestamp, format):
+    return datetime.fromtimestamp(
+        int(timestamp)
+    ).strftime(format)
+
+
 def render_template(template_name, *args, **data):
     lookup = TemplateLookup(directories=[current_dir + '/templates'], input_encoding='utf-8', output_encoding='utf-8',
                             encoding_errors='replace')
@@ -227,6 +234,7 @@ def render_template(template_name, *args, **data):
     data["user"] = Application.get_user()
     data["username"] = Application.get_username()
     data["userrole"] = Application.get_userrole()
+    data["format_time"] = format_time
     try:
         data["message"] = cherrypy.session["message"]
         cherrypy.session["message"] = None
