@@ -198,7 +198,23 @@
   },
   "thema-2": {
     "alias": "thema-2",
-    "discussions": {},
+    "discussions": {
+      "diskussion-1": {
+        "alias": "diskussion-1",
+        "articles": {
+          "beitrag-1": {
+            "alias": "beitrag-1",
+            "content": "Testinhalt",
+            "owner": "admin",
+            "timestamp": 1447070309,
+            "title": "Beitrag 1",
+            "truncated": false
+          }
+        },
+        "title": "Diskussion 1",
+        "truncated": false
+      }
+    },
     "name": "Thema 2"
   },
   "thema-6": {

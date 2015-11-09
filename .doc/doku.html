@@ -6,6 +6,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title></title>
   <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -13,18 +50,106 @@
 <body>
 <h1 id="dokumentation-praktikumsprojekt-forum">Dokumentation Praktikumsprojekt Forum</h1>
 <p>Dokumentation vom 09.11.2015 <br /> Praktikumsgruppe: E <br /> Team: Lukas Quast, Frederic Wagner <br /></p>
-<h2 id="allgemeine-beschreibung-der-lösung">Allgemeine Beschreibung der Lösung:</h2>
+<h2 id="allgemeine-beschreibung">Allgemeine Beschreibung:</h2>
+<p>Das Projekt &quot;Forum&quot; ist eine Client-Server-Anwendung zur Darstellung einzelner Webseiten und Formulare, die per Template-Engine <strong><em>mako</em></strong> erzeugt werden. <br /> Nutzung des Frameworks <strong><em>cherrypy</em></strong> für den Server. Die Präsentation des Projektes erfolgt per <strong><em>CSS</em></strong>. <br /> Zum Speichern der Daten des Forums (Themen, Diskussionen und Beiträge) und der Konten der Benutzer werden <strong><em>JSON</em></strong>-Dateien genutzt.<br /></p>
 <h2 id="beschreibung-der-komponenten">Beschreibung der Komponenten:</h2>
 <ul>
-<li>Zweck
+<li><strong>Class Repository:</strong>
 <ul>
-<li>asd</li>
+<li>Zweck <br /> Klasse, die Methoden zum Laden, Erstellen, Löschen und Sortieren von Usern, Themen, Diskussionen und Beiträgen enthält.</li>
+<li>Aufbau <br />
+<ul>
+<li>init(self)</li>
+<li>load_themes</li>
+<li>load_users</li>
+<li>sort_themes</li>
+<li>get_themes</li>
+<li>find_themes</li>
+<li>find_discussion</li>
+<li>get_users</li>
+<li>find_user</li>
+<li>create_theme</li>
+<li>create_discussion</li>
+<li>create_article</li>
+<li>save_themes</li>
+<li>save_users</li>
 </ul></li>
-<li>Aufbau</li>
+</ul></li>
+<li><strong>init(self)</strong>
+<ul>
+<li>Zweck: <br /> Initialisieren der Komponenten, laden der Themen, User und sortieren der Themen</li>
+</ul></li>
+<li><strong>Class Application:</strong>
+<ul>
+<li>Zweck: <br /> Klasse, die Methoden bereitstellt um die Seiten und Aktionen auf diesen zu definieren</li>
+<li>Aufbau: <br />
+<ul>
+<li>init(self)</li>
+<li>redirect</li>
+<li>get_user</li>
+<li>get_username</li>
+<li>get_userrole</li>
+<li>proof_admin</li>
+<li>proof_user</li>
+<li>index</li>
+<li>theme</li>
+<li>discussion</li>
+<li>users</li>
+<li>login</li>
+<li>create_theme</li>
+<li>create_discussion</li>
+<li>create_article</li>
+<li>logout</li>
+<li>default</li>
+</ul></li>
+</ul></li>
+<li>render_template(template_name, *args, **data)
+<ul>
+<li>Zweck: <br /> Globale Methode, die mit den ggegebenen Daten das Rendern des Templates anstößt</li>
+<li>Aufbau: <br /></li>
 <li>Zusammenwirken mit anderen Komponenten</li>
 <li>API</li>
+</ul></li>
+<li><strong>get_alias(name,</strong> <strong>data)</strong>
+<ul>
+<li>Zweck: <br /> Globale Methode zum ersetzen der Umlaute und Symbole um Fehler beim Zugriff auf Unterseiten abzufangen.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: create_article, create_discussion, create_theme</li>
+</ul></li>
 </ul>
 <h2 id="datenablage">Datenablage:</h2>
+<p><strong><em>In JSON-Datei als Dictionary-Struktur wie folgt:</em></strong></p>
+<h3 id="themen">Themen:</h3>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+  <span class="dt">&quot;thema-2&quot;</span><span class="fu">:</span> <span class="fu">{</span>
+    <span class="dt">&quot;alias&quot;</span><span class="fu">:</span> <span class="st">&quot;thema-2&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;discussions&quot;</span><span class="fu">:</span> <span class="fu">{</span>
+      <span class="dt">&quot;diskussion-1&quot;</span><span class="fu">:</span> <span class="fu">{</span>
+        <span class="dt">&quot;alias&quot;</span><span class="fu">:</span> <span class="st">&quot;diskussion-1&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;articles&quot;</span><span class="fu">:</span> <span class="fu">{</span>
+          <span class="dt">&quot;beitrag-1&quot;</span><span class="fu">:</span> <span class="fu">{</span>
+            <span class="dt">&quot;alias&quot;</span><span class="fu">:</span> <span class="st">&quot;beitrag-1&quot;</span><span class="fu">,</span>
+            <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;Testinhalt&quot;</span><span class="fu">,</span>
+            <span class="dt">&quot;owner&quot;</span><span class="fu">:</span> <span class="st">&quot;admin&quot;</span><span class="fu">,</span>
+            <span class="dt">&quot;timestamp&quot;</span><span class="fu">:</span> <span class="dv">1447070309</span><span class="fu">,</span>
+            <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;Beitrag 1&quot;</span><span class="fu">,</span>
+            <span class="dt">&quot;truncated&quot;</span><span class="fu">:</span> <span class="kw">false</span>
+          <span class="fu">}</span>
+        <span class="fu">},</span>
+        <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;Diskussion 1&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;truncated&quot;</span><span class="fu">:</span> <span class="kw">false</span>
+      <span class="fu">}</span>
+    <span class="fu">},</span>
+    <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Thema 2&quot;</span>
+  <span class="fu">}</span>
+<span class="fu">}</span></code></pre></div>
+<h3 id="user">User:</h3>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+  <span class="dt">&quot;user&quot;</span><span class="fu">:</span> <span class="fu">{</span>
+      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;User&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;password&quot;</span><span class="fu">:</span> <span class="st">&quot;012345&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;role&quot;</span><span class="fu">:</span> <span class="st">&quot;USER&quot;</span>
+  <span class="fu">}</span>
+<span class="fu">}</span></code></pre></div>
 <h2 id="konfiguration">Konfiguration:</h2>
 <h2 id="durchführung-und-ergebnis-der-geforderten-prüfungen">Durchführung und Ergebnis der geforderten Prüfungen:</h2>
 </body>
