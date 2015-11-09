@@ -87,7 +87,8 @@ dl > dd
 }
 
 ul#menu,
-ul#breadcrumb
+ul#breadcrumb,
+ul.inline
 {
     padding: 0;
     margin: 0;
@@ -99,17 +100,20 @@ ul#breadcrumb
     font-size: 0.75em;
 }
 ul#menu li,
-ul#breadcrumb li
+ul#breadcrumb li,
+ul.inline li
 {
     padding: 0;
     margin: 0;
     display: inline-block;
+    overflow: hidden;
 }
 ul#menu li:after,
 ul#breadcrumb li:after
 {
     padding: 0;
-    margin: 0 8px;
+    margin-left: 8px;
+    margin-right: 4px;
     content: "|";
     display: inline-block;
 }
@@ -127,6 +131,65 @@ ul#breadcrumb li:last-child:after
 {
     display: inline-block;
 }
+input,
+textarea,
+select,
+button
+{
+    display: block;
+    box-sizing: content-box;
+    width: 240px;
+    height: 1em;
+    padding: 4px;
+    vertical-align: bottom;
+    border: 1px solid black;
+    margin: 4px 4px 4px 0;
+}
+input[type='submit'],
+button
+{
+    width: auto;
+    border-color: black;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    cursor: pointer;
+}
+input[type='submit']:hover,
+button:hover
+{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+input[type='submit']:active,
+button:active
+{
+    background-color: rgba(0, 0, 0, 0.75);
+}
+textarea
+{
+    height: 3em;
+}
+.inline-form input,
+.inline-form textarea,
+.inline-form select
+{
+    display: inline-block;
+    max-width: 120px;
+    width: auto;
+}
+.message
+{
+    margin: 0;
+    padding: 8px;
+    background-color: lightblue;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+hr
+{
+    border-color: black;
+}
+
 input.error, textarea.error
 {
     color: red;

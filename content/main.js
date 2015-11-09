@@ -21,7 +21,7 @@ $(function(){
     //$("input.btn-delete").val("☓");
 
     $("form").submit(function(e){
-        $(this).find("input.required, textarea.required").each(function(){
+        $(this).find("input.required, textarea.required, select.required").each(function(){
             if( $(this).val() == "" )
             {
                 $(this).addClass("error");
