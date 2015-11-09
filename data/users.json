@@ -1,17 +1,20 @@
 {
+  "a": {
+    "alias": "a",
+    "name": "a",
+    "password": "b",
+    "role": "USER"
+  },
   "admin": {
-      "name": "Admin",
-      "password": "012345",
-      "role": "ADMIN"
+    "alias": "admin",
+    "name": "Admin",
+    "password": "012345",
+    "role": "ADMIN"
   },
   "user": {
-      "name": "User",
-      "password": "012345",
-      "role": "USER"
-  },
-  "pooruser": {
-      "name": "Poor User",
-      "password": "012345",
-      "role": "USER_READONLY"
+    "alias": "user",
+    "name": "User",
+    "password": "012345",
+    "role": "USER"
   }
 }

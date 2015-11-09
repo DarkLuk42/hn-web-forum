@@ -99,6 +99,14 @@ class Repository:
             msg_s = "Diskussion '" + str(discussion) + "' wurde nicht gefunden!"
             raise cherrypy.HTTPError(404, msg_s)
 
+    def find_article(self, theme, discussion, article):
+        discussion = self.find_discussion(theme, discussion)
+        try:
+            return discussion["articles"][article]
+        except:
+            msg_s = "Artikel '" + str(article) + "' wurde nicht gefunden!"
+            raise cherrypy.HTTPError(404, msg_s)
+
     def get_users(self):
         return self.users
 
@@ -155,12 +163,61 @@ class Repository:
         self.sort_themes()
         self.save_themes()
 
+    def delete_discussion(self, theme, discussion):
+        discussion = self.find_discussion(theme, discussion)
+        discussion["truncated"] = True
+        self.sort_themes()
+        self.save_themes()
+
+    def delete_article(self, theme, discussion, article):
+        article = self.find_article(theme, discussion, article)
+        article["truncated"] = True
+        self.sort_themes()
+        self.save_themes()
+
+    def update_discussion(self, theme, discussion, title):
+        discussion = self.find_discussion(theme, discussion)
+        discussion["title"] = title
+        self.sort_themes()
+        self.save_themes()
+
+    def update_article(self, theme, discussion, article, title, content):
+        article = self.find_article(theme, discussion, article)
+        article["title"] = title
+        article["content"] = content
+        self.sort_themes()
+        self.save_themes()
+
+    def create_user(self, alias, role, name, password):
+        if alias in self.users:
+            Application.redirect("/users", "Der Benutzername ist bereits vergeben.")
+        self.users[alias] = {
+            "alias": alias,
+            "role": role,
+            "name": name,
+            "password": password
+        }
+        self.save_users()
+
+    def update_user(self, alias, role, name, password=None):
+        user = self.find_user(alias)
+        user["role"] = role
+        user["name"] = name
+        if password is not None and password != "":
+            user["password"] = password
+        self.save_users()
+
+    def delete_user(self, alias):
+        user = self.find_user(alias)
+        del self.users[alias]
+        self.save_users()
+
     def save_themes(self):
         with open("data/themes.json", "w") as themes_file:
             json.dump(self.themes, themes_file, sort_keys=True, indent=2)
 
     def save_users(self):
-        with open("data/themes.json", "w") as users_file:
+        with open("data/users.json", "w") as users_file:
             json.dump(self.users, users_file, sort_keys=True, indent=2)
 
 
@@ -169,6 +226,8 @@ def render_template(template_name, *args, **data):
                             encoding_errors='replace')
     template = lookup.get_template(template_name + ".html")
     data["user"] = Application.get_user()
+    data["username"] = Application.get_username()
+    data["userrole"] = Application.get_userrole()
     try:
         data["message"] = cherrypy.session["message"]
         cherrypy.session["message"] = None
@@ -194,25 +253,25 @@ class Application(object):
 
     @staticmethod
     def get_username():
-        if "user" in cherrypy.session:
+        if "user" in cherrypy.session and cherrypy.session["user"] is not None:
             return cherrypy.session["user"]["alias"]
         return None
 
     @staticmethod
     def get_userrole():
-        if "user" in cherrypy.session:
+        if "user" in cherrypy.session and cherrypy.session["user"] is not None:
             return cherrypy.session["user"]["role"]
         return "GUEST"
 
     @staticmethod
     def proof_admin():
-        if Application.get_user() is None or Application.get_user()["role"] != "ADMIN":
+        if Application.get_userrole() != "ADMIN":
             msg_s = "Du bist kein Admin!"
             raise cherrypy.HTTPError(403, msg_s)
 
     @staticmethod
     def proof_user():
-        if Application.get_user() is None or ( Application.get_user()["role"] != "ADMIN" and Application.get_user()["role"] != "USER" ):
+        if Application.get_userrole() != "ADMIN" and Application.get_userrole() != "USER":
             msg_s = "Du hast keine Schreibrechte!"
             raise cherrypy.HTTPError(403, msg_s)
 
@@ -230,7 +289,10 @@ class Application(object):
         obj_discussion = self.repository.find_discussion(theme, discussion)
         if obj_discussion["truncated"]:
             Application.redirect("/" + theme, u"Die Diskussion wurde gelöscht.")
-        return render_template("discussion", theme=obj_theme, discussion=obj_discussion)
+        last_article = None
+        for key in obj_discussion["articles"]:
+            last_article = obj_discussion["articles"][key]
+        return render_template("discussion", theme=obj_theme, discussion=obj_discussion, last_article=last_article)
     discussion.exposed = False
 
     def users(self):
@@ -277,18 +339,166 @@ class Application(object):
         if "theme" in kwargs and kwargs["theme"]:
             if "discussion" in kwargs and kwargs["discussion"]:
                 if "title" in kwargs and kwargs["title"]:
-                    if "content" in kwargs and kwargs["content"]:
+                    if "title" in kwargs and kwargs["title"]:
                         self.repository.create_article(
                             theme=kwargs["theme"],
                             discussion=kwargs["discussion"],
                             title=kwargs["title"],
                             content=kwargs["content"])
-                        Application.redirect("/"+kwargs["theme"]+"/"+kwargs["discussion"], "Die Diskussion wurde erfolgreich angelegt!")
-                    Application.redirect("/"+kwargs["theme"]+"/"+kwargs["discussion"], "Ein Inhalt ist erforderlich.")
+                        Application.redirect("/"+kwargs["theme"]+"/"+kwargs["discussion"],
+                                             "Der Beitrag wurde erfolgreich gelöscht!")
+                    Application.redirect("/"+kwargs["theme"]+"/"+kwargs["discussion"],
+                                         "Ein Inhalt ist erforderlich.")
                 Application.redirect("/"+kwargs["theme"]+"/"+kwargs["discussion"], "Ein Titel ist erforderlich.")
             Application.redirect("/"+kwargs["theme"], "Eine Diskussion ist erforderlich.")
         Application.redirect("/", "Ein Thema ist erforderlich.")
     create_article.exposed = True
+
+    def delete_discussion(self, **kwargs):
+        Application.proof_admin()
+        if "theme" in kwargs and kwargs["theme"]:
+            if "discussion" in kwargs and kwargs["discussion"]:
+                self.repository.delete_discussion(
+                    theme=kwargs["theme"],
+                    discussion=kwargs["discussion"])
+                Application.redirect("/"+kwargs["theme"]+"/"+kwargs["discussion"], "Die Diskussion wurde erfolgreich gelöscht!")
+            Application.redirect("/"+kwargs["theme"], "Eine Diskussion ist erforderlich.")
+        Application.redirect("/", "Ein Thema ist erforderlich.")
+    delete_discussion.exposed = True
+
+    def delete_article(self, **kwargs):
+        Application.proof_user()
+        if "theme" in kwargs and kwargs["theme"]:
+            if "discussion" in kwargs and kwargs["discussion"]:
+                if "article" in kwargs and kwargs["article"]:
+                    discussion = self.repository.find_discussion(
+                        theme=kwargs["theme"],
+                        discussion=kwargs["discussion"])
+                    article = self.repository.find_article(
+                        theme=kwargs["theme"],
+                        discussion=kwargs["discussion"],
+                        article=kwargs["article"])
+                    if Application.get_userrole() != "ADMIN" and article["owner"] != Application.get_username():
+                        msg_s = "Du bist nicht der Besizer!"
+                        raise cherrypy.HTTPError(403, msg_s)
+                    last_article = None
+                    for key in discussion["articles"]:
+                        last_article = key
+                    if Application.get_userrole() != "ADMIN" and last_article != article["alias"]:
+                        msg_s = "Du kannst nur den letzten Beitrag bearbeiten!"
+                        raise cherrypy.HTTPError(403, msg_s)
+
+                    self.repository.delete_article(
+                        theme=kwargs["theme"],
+                        discussion=kwargs["discussion"],
+                        article=kwargs["article"])
+                    Application.redirect("/"+kwargs["theme"]+"/"+kwargs["discussion"], "Der Beitrag wurde erfolgreich gelöscht!")
+                Application.redirect("/"+kwargs["theme"]+"/"+kwargs["discussion"], "Ein Beitrag ist erforderlich.")
+            Application.redirect("/"+kwargs["theme"], "Eine Diskussion ist erforderlich.")
+        Application.redirect("/", "Ein Thema ist erforderlich.")
+    delete_article.exposed = True
+
+    def update_discussion(self, **kwargs):
+        Application.proof_admin()
+        if "theme" in kwargs and kwargs["theme"]:
+            if "discussion" in kwargs and kwargs["discussion"]:
+                if "title" in kwargs and kwargs["title"]:
+                    self.repository.update_discussion(
+                        theme=kwargs["theme"],
+                        discussion=kwargs["discussion"],
+                        title=kwargs["title"])
+                    Application.redirect("/"+kwargs["theme"]+"/"+kwargs["discussion"], "Die Diskussion wurde erfolgreich gelöscht!")
+                Application.redirect("/"+kwargs["theme"]+"/"+kwargs["discussion"], "Ein Titel ist erforderlich!")
+            Application.redirect("/"+kwargs["theme"], "Eine Diskussion ist erforderlich.")
+        Application.redirect("/", "Ein Thema ist erforderlich.")
+    update_discussion.exposed = True
+
+    def update_article(self, **kwargs):
+        Application.proof_user()
+        if "theme" in kwargs and kwargs["theme"]:
+            if "discussion" in kwargs and kwargs["discussion"]:
+                if "article" in kwargs and kwargs["article"]:
+                    if "title" in kwargs and kwargs["title"]:
+                        if "content" in kwargs and kwargs["content"]:
+                            discussion = self.repository.find_discussion(
+                                theme=kwargs["theme"],
+                                discussion=kwargs["discussion"])
+                            article = self.repository.find_article(
+                                theme=kwargs["theme"],
+                                discussion=kwargs["discussion"],
+                                article=kwargs["article"])
+                            if Application.get_userrole() != "ADMIN" and article["owner"] != Application.get_username():
+                                msg_s = "Du bist nicht der Besizer!"
+                                raise cherrypy.HTTPError(403, msg_s)
+                            last_article = None
+                            for key in discussion["articles"]:
+                                last_article = key
+                            if Application.get_userrole() != "ADMIN" and last_article != article["alias"]:
+                                msg_s = "Du kannst nur den letzten Beitrag bearbeiten!"
+                                raise cherrypy.HTTPError(403, msg_s)
+
+                            self.repository.update_article(
+                                theme=kwargs["theme"],
+                                discussion=kwargs["discussion"],
+                                article=kwargs["article"],
+                                title=kwargs["title"],
+                                content=kwargs["content"])
+                            Application.redirect("/"+kwargs["theme"]+"/"+kwargs["discussion"], "Der Beitrag wurde erfolgreich gelöscht!")
+                        Application.redirect("/"+kwargs["theme"]+"/"+kwargs["discussion"], "Ein Inhalt ist erforderlich.")
+                    Application.redirect("/"+kwargs["theme"]+"/"+kwargs["discussion"], "Ein Titel ist erforderlich.")
+                Application.redirect("/"+kwargs["theme"]+"/"+kwargs["discussion"], "Ein Beitrag ist erforderlich.")
+            Application.redirect("/"+kwargs["theme"], "Eine Diskussion ist erforderlich.")
+        Application.redirect("/", "Ein Thema ist erforderlich.")
+    update_article.exposed = True
+
+    def create_user(self, **kwargs):
+        Application.proof_admin()
+        if "alias" in kwargs and kwargs["alias"] and kwargs["alias"] == get_alias(kwargs["alias"]):
+            if "role" in kwargs and kwargs["role"] in ("ADMIN", "USER", "USER_READONLY"):
+                if "name" in kwargs and kwargs["name"]:
+                    if "password" in kwargs and kwargs["password"]:
+                        self.repository.create_user(
+                            alias=kwargs["alias"],
+                            role=kwargs["role"],
+                            name=kwargs["name"],
+                            password=kwargs["password"])
+                        Application.redirect("/users", "Der Benutzer wurde erfolgreich angelegt!")
+                    Application.redirect("/users", "Ein Passwort ist erforderlich.")
+                Application.redirect("/users", "Ein Name ist erforderlich.")
+            Application.redirect("/users", "Eine gültige Rolle ist erforderlich. ('ADMIN', 'USER' oder 'USER_READONLY')")
+        Application.redirect("/users", "Ein gültiger Benutzername ist erforderlich.")
+    create_user.exposed = True
+
+    def update_user(self, **kwargs):
+        Application.proof_admin()
+        if "alias" in kwargs and kwargs["alias"] and kwargs["alias"] == get_alias(kwargs["alias"]):
+            if "role" in kwargs and kwargs["role"] in ("ADMIN", "USER", "USER_READONLY"):
+                if "name" in kwargs and kwargs["name"]:
+                    if "password" in kwargs and kwargs["password"]:
+                        self.repository.update_user(
+                            alias=kwargs["alias"],
+                            role=kwargs["role"],
+                            name=kwargs["name"],
+                            password=kwargs["password"])
+                    else:
+                        self.repository.update_user(
+                            alias=kwargs["alias"],
+                            role=kwargs["role"],
+                            name=kwargs["name"])
+                    Application.redirect("/users", "Der Benutzer wurde erfolgreich bearbeitet!")
+                Application.redirect("/users", "Ein Name ist erforderlich.")
+            Application.redirect("/users", "Eine gültige Rolle ist erforderlich. ('ADMIN', 'USER' oder 'USER_READONLY')")
+        Application.redirect("/users", "Ein gültiger Benutzername ist erforderlich.")
+    update_user.exposed = True
+
+    def delete_user(self, **kwargs):
+        Application.proof_admin()
+        if "alias" in kwargs and kwargs["alias"] and kwargs["alias"] == get_alias(kwargs["alias"]):
+            self.repository.delete_user(
+                alias=kwargs["alias"])
+            Application.redirect("/users", "Der Benutzer wurde erfolgreich gelöscht!")
+        Application.redirect("/users", "Ein Benutzername ist erforderlich.")
+    delete_user.exposed = True
 
     def logout(self):
         cherrypy.session["user"] = None

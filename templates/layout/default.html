@@ -4,9 +4,15 @@
     <head>
         <title><%block name="title"/></title>
         <meta charset="UTF-8"/>
+
+        <link rel="stylesheet" href="/main.css"/>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="/main.js"></script>
     </head>
     <body>
         <header>
+            <a href="/users">Benutzer</a>
             <%include file="/partials/breadcrumb.html"/>
 
             %if user is None:
@@ -22,7 +28,7 @@
         </header>
         <div>
             %if message != None:
-                <p>${message}</p>
+                <p class="alert alert-info">${message}</p>
             %endif
 
             <%block name="content"/>

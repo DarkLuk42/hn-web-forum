@@ -1,0 +1,17 @@
+ul#breadcrumb{
+    list-style: none;
+}
+ul#breadcrumb li{
+    display: inline-block;
+}
+ul#breadcrumb li:after{
+    content: "|";
+    display: inline-block;
+}
+.inline-form, .hidden-form{
+    display: inline-block;
+}
+input.error, textarea.error{
+    color: red;
+    border-color: red;
+}
