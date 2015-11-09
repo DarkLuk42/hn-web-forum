@@ -1,20 +1,15 @@
 # coding: utf-8
 <%inherit file="layout/default.html"/>
 
-<%block name="title">Forum</%block>
+<%block name="title">${discussion["title"]|h}</%block>
 <%block name="content">
-    <h1>Forum</h1>
-    <p>
-        <a href="/${theme['alias']}">${theme["name"]}</a>
-        ->
-        <a href="/${theme['alias']}/${discussion['alias']}">${discussion["title"]}</a>:
-    </p>
+    <h1>${discussion["title"]|h}</h1>
     <ul>
         %for article in discussion["articles"]:
             <li>
                 %if discussion["articles"][article]["truncated"] == False:
-                    ${discussion["articles"][article]["title"]}
-                    ${discussion["articles"][article]["content"]}
+                    ${discussion["articles"][article]["title"]|h}
+                    ${discussion["articles"][article]["content"]|h}
                     ${discussion["articles"][article]["owner"]}
                     ${discussion["articles"][article]["timestamp"]}
                 %endif
@@ -24,4 +19,11 @@
             </li>
         %endfor
     </ul>
+    <form action="/create_article" method="post">
+        <input type="hidden" name="theme" value="${theme['alias']}">
+        <input type="hidden" name="discussion" value="${discussion['alias']}">
+        <input type="text" name="title" placeholder="Titel"/>
+        <textarea name="content" placeholder="Inhalt"></textarea>
+        <input type="submit" value="Beitrag absenden"/>
+    </form>
 </%block>

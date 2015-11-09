@@ -1,44 +1,209 @@
 {
   "thema-1": {
-    "name": "Thema 1",
+    "alias": "thema-1",
     "discussions": {
-      "ist-php-wirklich-so-doof": {
-        "truncated": false,
-        "title": "Ist PHP wirklich so doof?",
+      "a": {
+        "alias": "a",
         "articles": {
-          "nein": {
-              "truncated": false,
-              "title": "Nein",
-              "content": "PHP ist voll toll! :)",
-              "owner": "luk",
-              "timestamp": 123456789
+          "b": {
+            "alias": "b",
+            "content": "c",
+            "owner": "admin",
+            "timestamp": 1447067036.114971,
+            "title": "b",
+            "truncated": false
           },
-          "nein2": {
-              "truncated": false,
-              "title": "Nein",
-              "content": "PHP ist wirklich voll toll! :)",
-              "owner": "luk",
-              "timestamp": 123456789
-          },
-          "ja": {
-              "truncated": true,
-              "title": "Ja!",
-              "content": "PHP ist voll der dreck!!!",
-              "owner": "luk",
-              "timestamp": 123456789
+          "ba": {
+            "alias": "ba",
+            "content": "b\r\n",
+            "owner": "admin",
+            "timestamp": 1447068651,
+            "title": "ba",
+            "truncated": false
           }
-        }
+        },
+        "title": "a",
+        "truncated": false
+      },
+      "b": {
+        "alias": "b",
+        "articles": {
+          "b": {
+            "alias": "b",
+            "content": "b\r\n",
+            "owner": "admin",
+            "timestamp": 123,
+            "title": "b",
+            "truncated": false
+          }
+        },
+        "title": "b",
+        "truncated": false
+      },
+      "b-4": {
+        "alias": "b-4",
+        "articles": {
+          "b4": {
+            "alias": "b4",
+            "content": "b4",
+            "owner": "admin",
+            "timestamp": 1447067358,
+            "title": "b4",
+            "truncated": false
+          }
+        },
+        "title": "b 4",
+        "truncated": false
+      },
+      "b2": {
+        "alias": "b2",
+        "articles": {
+          "b": {
+            "alias": "b",
+            "content": "b",
+            "owner": "admin",
+            "timestamp": 1447068867,
+            "title": "b",
+            "truncated": false
+          }
+        },
+        "title": "b",
+        "truncated": false
+      },
+      "c": {
+        "alias": "c",
+        "articles": {
+          "c": {
+            "alias": "c",
+            "content": "c",
+            "owner": "admin",
+            "timestamp": 1447067133,
+            "title": "c",
+            "truncated": false
+          }
+        },
+        "title": "c",
+        "truncated": false
       },
       "geloescht": {
-        "truncated": true,
-        "title": "Diese Diskussion ist gelöscht.",
-        "articles": { }
+        "alias": "geloescht",
+        "articles": {},
+        "title": "Diese Diskussion ist gel\u00f6scht.",
+        "truncated": true
+      },
+      "ist-php-wirklich-so-doof": {
+        "alias": "ist-php-wirklich-so-doof",
+        "articles": {
+          "a": {
+            "alias": "a",
+            "content": "2",
+            "owner": "admin",
+            "timestamp": 1447067778,
+            "title": "a",
+            "truncated": false
+          },
+          "a2": {
+            "alias": "a2",
+            "content": "b",
+            "owner": "admin",
+            "timestamp": 1447068628,
+            "title": "a",
+            "truncated": false
+          },
+          "b": {
+            "alias": "b",
+            "content": "4",
+            "owner": "admin",
+            "timestamp": 1447067887,
+            "title": "b",
+            "truncated": false
+          },
+          "b3": {
+            "alias": "b3",
+            "content": "6",
+            "owner": "admin",
+            "timestamp": 1447068143,
+            "title": "b",
+            "truncated": false
+          },
+          "b4": {
+            "alias": "b4",
+            "content": "7",
+            "owner": "admin",
+            "timestamp": 1447068233,
+            "title": "b",
+            "truncated": false
+          },
+          "c": {
+            "alias": "c",
+            "content": "3\r\n",
+            "owner": "admin",
+            "timestamp": 1447068156,
+            "title": "c",
+            "truncated": false
+          },
+          "ja": {
+            "alias": "ja",
+            "content": "PHP ist voll der dreck!!!",
+            "owner": "luk",
+            "timestamp": 123456789,
+            "title": "Ja!",
+            "truncated": true
+          },
+          "link": {
+            "alias": "link",
+            "content": "<a href='http://google.com'>google</a>",
+            "owner": "admin",
+            "timestamp": 1447069137,
+            "title": "link",
+            "truncated": false
+          },
+          "nein": {
+            "alias": "nein",
+            "content": "PHP ist voll toll! :)",
+            "owner": "luk",
+            "timestamp": 123456789,
+            "title": "Nein",
+            "truncated": false
+          },
+          "nein2": {
+            "alias": "nein2",
+            "content": "PHP ist wirklich voll toll! :)",
+            "owner": "luk",
+            "timestamp": 123456789,
+            "title": "Nein",
+            "truncated": false
+          }
+        },
+        "title": "Ist PHP wirklich so doof?",
+        "truncated": false
+      },
+      "oeaeuess-asn-hh": {
+        "alias": "oeaeuess-asn-hh",
+        "articles": {
+          "q": {
+            "alias": "q",
+            "content": "q",
+            "owner": "admin",
+            "timestamp": 1447068917,
+            "title": "q",
+            "truncated": false
+          }
+        },
+        "title": "\u00f6\u00e4\u00fc\u00df asn- &%hh",
+        "truncated": false
       }
-    }
+    },
+    "name": "Thema 1"
   },
-  "thema-2":
-  {
-    "name": "Thema 2",
-    "discussions": {}
+  "thema-2": {
+    "alias": "thema-2",
+    "discussions": {},
+    "name": "Thema 2"
+  },
+  "thema-6": {
+    "alias": "thema-6",
+    "discussions": {},
+    "name": "Thema 6"
   }
 }
