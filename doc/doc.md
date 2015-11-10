@@ -196,6 +196,8 @@ Zum Speichern der Daten des Forums (Themen, Diskussionen und Beiträge) und der 
         + update_user
         + delete_user
         + logout
+        + error_page_403
+        + error_page_404
         + default
 
 ### Methoden der Class Application:
@@ -310,6 +312,14 @@ Zum Speichern der Daten des Forums (Themen, Diskussionen und Beiträge) und der 
     + Zweck: \
         Setzt den aktuellen User der Session auf None und logt den Benutzer somit aus.
 
+- **error_page_404**
+    + Zweck: \
+        Eigene Darstellung der Fehlermeldung "404 Not Found".
+
+- **error_page_403**
+    + Zweck: \
+        Eigene Darstellung der Fehlermeldung "403 Forbidden".
+
 - **default**
     + Zweck: \
         Methode, die Aufgerufen wird, wenn keine andere Aufgerufen werden kann.
@@ -416,7 +426,9 @@ Zum Speichern der Daten des Forums (Themen, Diskussionen und Beiträge) und der 
             'tools.sessions.storage_path': './data/sessions',
             'tools.sessions.timeout': 10,
             'tools.encode.on': True,
-            'tools.encode.encoding': "utf-8"
+            'tools.encode.encoding': "utf-8",
+            'error_page.403': application.Application.error_page_403,
+            'error_page.404': application.Application.error_page_404
       }
 }
 ```
