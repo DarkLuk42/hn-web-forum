@@ -1,0 +1,229 @@
+html
+{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+body
+{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    min-height: 100%;
+    max-width: 800px;
+    margin: auto;
+    background-color: white;
+    font-family: "Arial";
+    font-size: 1em;
+}
+header
+{
+    border-bottom: 1px solid black;
+}
+footer
+{
+    border-top: 1px solid black;
+}
+header,
+footer,
+div.content
+{
+    padding: 16px;
+}
+a,
+a:hover,
+a:active,
+a:visited
+{
+    color: green;
+    text-decoration: none;
+}
+a:hover
+{
+    text-decoration: underline;
+}
+
+table
+{
+    width: 100%;
+    border: 1px solid black;
+    border-spacing: 0;
+    border-collapse: separate;
+}
+table td
+{
+    border: 1px solid black;
+    padding: 8px;
+}
+
+dl
+{
+    padding: 0;
+    margin: 0;
+}
+dl > dt
+{
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+}
+dl > dt:after
+{
+    display: inline;
+    content: ":";
+}
+dl > dd
+{
+    padding: 0;
+    margin: 0;
+}
+
+.truncated
+{
+    color: gray;
+    text-decoration: line-through;
+}
+
+ul#menu,
+ul#breadcrumb,
+ul.inline
+{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+ul#breadcrumb
+{
+    margin-top: 1em;
+    font-size: 0.75em;
+}
+ul#menu li,
+ul#breadcrumb li,
+ul.inline li
+{
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    overflow: hidden;
+}
+ul#menu li:after,
+ul#breadcrumb li:after
+{
+    padding: 0;
+    margin-left: 8px;
+    margin-right: 4px;
+    content: "|";
+    display: inline-block;
+}
+ul#breadcrumb li:after
+{
+    content: "»";
+}
+ul#menu li:last-child:after,
+ul#breadcrumb li:last-child:after
+{
+    display: none;
+}
+
+.inline-form, .hidden-form
+{
+    display: inline-block;
+}
+input,
+textarea,
+select,
+button
+{
+    display: block;
+    box-sizing: content-box;
+    width: 240px;
+    height: 1em;
+    padding: 4px;
+    vertical-align: bottom;
+    border: 1px solid black;
+    margin: 4px 4px 4px 0;
+}
+input[type='submit'],
+button
+{
+    width: auto;
+    border-color: black;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    cursor: pointer;
+}
+input[type='submit']:hover,
+button:hover
+{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+input[type='submit']:active,
+button:active
+{
+    background-color: rgba(0, 0, 0, 0.75);
+}
+input[type='submit'].btn-delete,
+button.btn-delete
+{
+    background-color: #FF9999;
+}
+input[type='submit'].btn-delete:hover,
+button.btn-delete:hover
+{
+    background-color: #FF7777;
+}
+input[type='submit'].btn-delete:active,
+button.btn-delete:active
+{
+    background-color: #FF3333;
+}
+textarea
+{
+    height: 3em;
+}
+.inline-form input,
+.inline-form textarea,
+.inline-form select
+{
+    display: inline-block;
+    max-width: 120px;
+    width: auto;
+}
+.message
+{
+    margin: 0;
+    padding: 8px;
+    background-color: lightblue;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+.message-error
+{
+    background-color: #FF9999;
+}
+
+hr
+{
+    border-color: black;
+}
+
+input.error, textarea.error
+{
+    color: red;
+    border-color: red;
+}
+.pull-left
+{
+    float: left;
+}
+.pull-right
+{
+    float: right;
+}
+.clear
+{
+    clear: both;
+    overflow: hidden;
+}

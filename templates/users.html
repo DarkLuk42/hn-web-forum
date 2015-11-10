@@ -1,0 +1,69 @@
+# coding: utf-8
+<%inherit file="layout/default.html"/>
+
+<%block name="title">Benutzer</%block>
+<%block name="content">
+    <h1>Benutzer</h1>
+    <p>
+        Hier sind alle Benutzer aufgelistet.
+    </p>
+    <ul>
+        %for user in users:
+            <li>
+                ${users[user]["name"]}
+                %if userrole == "ADMIN":
+                    (Rolle: ${users[user]["role"]})
+                    <ul class="inline">
+                        <li>
+                            <form class="inline-form" action="/delete_user" method="post">
+                                <input type="hidden" name="alias" value="${users[user]['alias']}">
+                                <input class="btn-delete" type="submit" value="Benutzer löschen"/>
+                            </form>
+                        </li><li>
+                            <div class="hidden-form">
+                                <button class="show-form btn-edit">bearbeiten</button>
+                                <button class="hide-form">abbrechen</button>
+                                <form action="/update_user" method="post">
+                                    <input type="hidden" name="alias" value="${users[user]['alias']}">
+                                    <select name="role" class="required">
+                                        %if users[user]["role"] == "ADMIN":
+                                            <option value="ADMIN" selected>Administrator</option>
+                                        %else:
+                                            <option value="ADMIN">Administrator</option>
+                                        %endif
+                                        %if users[user]["role"] == "USER":
+                                            <option value="USER" selected>Benutzer</option>
+                                        %else:
+                                            <option value="USER">Benutzer</option>
+                                        %endif
+                                        %if users[user]["role"] == "USER_READONLY":
+                                            <option value="USER_READONLY" selected>Benutzer (nur lesen)</option>
+                                        %else:
+                                            <option value="USER_READONLY">Benutzer (nur lesen)</option>
+                                        %endif
+                                    </select>
+                                    <input type="text" name="name" placeholder="Name" class="required" value="${users[user]['name']}"/>
+                                    <input type="text" name="password" placeholder="Passwort"/>
+                                    <input type="submit" value="Benutzer bearbeiten"/>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                %endif
+            </li>
+        %endfor
+    </ul>
+    %if userrole == "ADMIN":
+        <form action="/create_user" method="post">
+            <input type="text" name="alias" placeholder="Benutzername" class="required"/>
+            <select name="role" class="required">
+                <option value="ADMIN">Administrator</option>
+                <option value="USER">Benutzer</option>
+                <option value="USER_READONLY">Benutzer (nur lesen)</option>
+            </select>
+            <input type="text" name="name" placeholder="Name" class="required"/>
+            <input type="text" name="password" placeholder="Passwort" class="required"/>
+            <input type="submit" value="Benutzer erstellen"/>
+        </form>
+    %endif
+</%block>

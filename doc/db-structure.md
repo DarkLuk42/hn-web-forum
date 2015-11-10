@@ -1,6 +1,6 @@
 # DB-Structure
 
-##Theme
+## Theme
 ```
 {
 	alias: "php",
@@ -11,10 +11,11 @@
 }
 ```
 
-##Discussion
+## Discussion
 ```
 {
 	alias: "php",
+	truncated: false,
 	title: "PHP",
 	articles: [
 		...
@@ -22,10 +23,11 @@
 }
 ```
 
-##Article
+## Article
 ```
 {
 	alias: "php",
+	truncated: false,
 	title: "PHP",
 	content: "PHP ist voll toll! :)",
 	owner: "luk",
@@ -33,10 +35,11 @@
 }
 ```
 
-##User
+## User
 ```
 {
 	alias: "luk",
+	truncated: false,
 	name: "Lukas",
 	password: "012345",
 	role: "ADMIN"

@@ -1,0 +1,20 @@
+{
+  "pooruser": {
+    "alias": "pooruser",
+    "name": "poor User",
+    "password": "012345",
+    "role": "USER_READONLY"
+  },
+  "admin": {
+    "alias": "admin",
+    "name": "Admin",
+    "password": "012345",
+    "role": "ADMIN"
+  },
+  "user": {
+    "alias": "user",
+    "name": "User",
+    "password": "012345",
+    "role": "USER"
+  }
+}

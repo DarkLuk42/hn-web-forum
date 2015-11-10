@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # coding: utf-8
 
 import os
@@ -22,7 +22,14 @@ def main():
             'tools.staticdir.root': current_dir,
             'tools.staticdir.on': True,
             'tools.staticdir.dir': './content',
-            'tools.staticdir.index': 'index.html'
+            'tools.sessions.on': True,
+            'tools.sessions.storage_type': "File",
+            'tools.sessions.storage_path': './data/sessions',
+            'tools.sessions.timeout': 10,
+            'tools.encode.on': True,
+            'tools.encode.encoding': "utf-8",
+            'error_page.403': application.Application.error_page_403,
+            'error_page.404': application.Application.error_page_404
         }
     }
     # Mount static content handler

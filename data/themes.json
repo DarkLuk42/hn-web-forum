@@ -1,0 +1,157 @@
+{
+  "thema-1": {
+    "alias": "thema-1",
+    "discussions": {
+      "funktionieren-diskussionen": {
+        "alias": "funktionieren-diskussionen",
+        "articles": {
+          "del": {
+            "alias": "del",
+            "content": "deleted",
+            "owner": "admin",
+            "timestamp": 1447067778,
+            "title": "del",
+            "truncated": true
+          },
+          "es-klappt-sogar-utf-8": {
+            "alias": "es-klappt-sogar-utf-8",
+            "content": "~Char\tDec\tHex\tEntity\tName\r\n\u2600\t9728\t2600\t \tBLACK SUN WITH RAYS\r\n\u2601\t9729\t2601\t \tCLOUD\r\n\u2602\t9730\t2602\t \tUMBRELLA\r\n\u2603\t9731\t2603\t \tSNOWMAN\r\n\u2604\t9732\t2604\t \tCOMET\r\n\u2605\t9733\t2605\t \tBLACK STAR\r\n\u2606\t9734\t2606\t \tWHITE STAR\r\n\u2607\t9735\t2607\t \tLIGHTNING\r\n\u2608\t9736\t2608\t \tTHUNDERSTORM\r\n\u2609\t9737\t2609\t \tSUN\r\n\u260a\t9738\t260A\t \tASCENDING NODE\r\n\u260b\t9739\t260B\t \tDESCENDING NODE\r\n\u260c\t9740\t260C\t \tCONJUNCTION\r\n\u260d\t9741\t260D\t \tOPPOSITION\r\n\u260e\t9742\t260E\t \tBLACK TELEPHONE\r\n\u260f\t9743\t260F\t \tWHITE TELEPHONE\r\n\u2610\t9744\t2610\t \tBALLOT BOX\r\n\u2611\t9745\t2611\t \tBALLOT BOX WITH CHECK\r\n\u2612\t9746\t2612\t \tBALLOT BOX WITH X\r\n\u2613\t9747\t2613\t \tSALTIRE\r\n\u2614\t9748\t2614\t \tUMBRELLA WITH RAIN DROPS\r\n\u2615\t9749\t2615\t \tHOT BEVERAGE\r\n\u2616\t9750\t2616\t \tWHITE SHOGI PIECE\r\n\u2617\t9751\t2617\t \tBLACK SHOGI PIECE\r\n\u2618\t9752\t2618\t \tSHAMROCK\r\n\u2619\t9753\t2619\t \tREVERSED ROTATED FLORAL HEART BULLET\r\n\u261a\t9754\t261A\t \tBLACK LEFT POINTING INDEX\r\n\u261b\t9755\t261B\t \tBLACK RIGHT POINTING INDEX\r\n\u261c\t9756\t261C\t \tWHITE LEFT POINTING INDEX\r\n\u261d\t9757\t261D\t \tWHITE UP POINTING INDEX\r\n\u261e\t9758\t261E\t \tWHITE RIGHT POINTING INDEX\r\n\u261f\t9759\t261F\t \tWHITE DOWN POINTING INDEX\r\n\u2620\t9760\t2620\t \tSKULL AND CROSSBONES\r\n\u2621\t9761\t2621\t \tCAUTION SIGN\r\n\u2622\t9762\t2622\t \tRADIOACTIVE SIGN\r\n\u2623\t9763\t2623\t \tBIOHAZARD SIGN\r\n\u2624\t9764\t2624\t \tCADUCEUS\r\n\u2625\t9765\t2625\t \tANKH\r\n\u2626\t9766\t2626\t \tORTHODOX CROSS\r\n\u2627\t9767\t2627\t \tCHI RHO\r\n\u2628\t9768\t2628\t \tCROSS OF LORRAINE\r\n\u2629\t9769\t2629\t \tCROSS OF JERUSALEM\r\n\u262a\t9770\t262A\t \tSTAR AND CRESCENT\r\n\u262b\t9771\t262B\t \tFARSI SYMBOL\r\n\u262c\t9772\t262C\t \tADI SHAKTI\r\n\u262d\t9773\t262D\t \tHAMMER AND SICKLE\r\n\u262e\t9774\t262E\t \tPEACE SYMBOL\r\n\u262f\t9775\t262F\t \tYIN YANG\r\n\u2630\t9776\t2630\t \tTRIGRAM FOR HEAVEN\r\n\u2631\t9777\t2631\t \tTRIGRAM FOR LAKE\r\n\u2632\t9778\t2632\t \tTRIGRAM FOR FIRE\r\n\u2633\t9779\t2633\t \tTRIGRAM FOR THUNDER\r\n\u2634\t9780\t2634\t \tTRIGRAM FOR WIND\r\n\u2635\t9781\t2635\t \tTRIGRAM FOR WATER\r\n\u2636\t9782\t2636\t \tTRIGRAM FOR MOUNTAIN\r\n\u2637\t9783\t2637\t \tTRIGRAM FOR EARTH\r\n\u2638\t9784\t2638\t \tWHEEL OF DHARMA\r\n\u2639\t9785\t2639\t \tWHITE FROWNING FACE\r\n\u263a\t9786\t263A\t \tWHITE SMILING FACE\r\n\u263b\t9787\t263B\t \tBLACK SMILING FACE\r\n\u263c\t9788\t263C\t \tWHITE SUN WITH RAYS\r\n\u263d\t9789\t263D\t \tFIRST QUARTER MOON\r\n\u263e\t9790\t263E\t \tLAST QUARTER MOON\r\n\u263f\t9791\t263F\t \tMERCURY\r\n\u2640\t9792\t2640\t \tFEMALE SIGN\r\n\u2641\t9793\t2641\t \tEARTH\r\n\u2642\t9794\t2642\t \tMALE SIGN\r\n\u2643\t9795\t2643\t \tJUPITER\r\n\u2644\t9796\t2644\t \tSATURN\r\n\u2645\t9797\t2645\t \tURANUS\r\n\u2646\t9798\t2646\t \tNEPTUNE\r\n\u2647\t9799\t2647\t \tPLUTO\r\n\u2648\t9800\t2648\t \tARIES\r\n\u2649\t9801\t2649\t \tTAURUS\r\n\u264a\t9802\t264A\t \tGEMINI\r\n\u264b\t9803\t264B\t \tCANCER\r\n\u264c\t9804\t264C\t \tLEO\r\n\u264d\t9805\t264D\t \tVIRGO\r\n\u264e\t9806\t264E\t \tLIBRA\r\n\u264f\t9807\t264F\t \tSCORPIUS\r\n\u2650\t9808\t2650\t \tSAGITTARIUS\r\n\u2651\t9809\t2651\t \tCAPRICORN\r\n\u2652\t9810\t2652\t \tAQUARIUS\r\n\u2653\t9811\t2653\t \tPISCES\r\n\u2654\t9812\t2654\t \tWHITE CHESS KING\r\n\u2655\t9813\t2655\t \tWHITE CHESS QUEEN\r\n\u2656\t9814\t2656\t \tWHITE CHESS ROOK\r\n\u2657\t9815\t2657\t \tWHITE CHESS BISHOP\r\n\u2658\t9816\t2658\t \tWHITE CHESS KNIGHT\r\n\u2659\t9817\t2659\t \tWHITE CHESS PAWN\r\n\u265a\t9818\t265A\t \tBLACK CHESS KING\r\n\u265b\t9819\t265B\t \tBLACK CHESS QUEEN\r\n\u265c\t9820\t265C\t \tBLACK CHESS ROOK\r\n\u265d\t9821\t265D\t \tBLACK CHESS BISHOP\r\n\u265e\t9822\t265E\t \tBLACK CHESS KNIGHT\r\n\u265f\t9823\t265F\t \tBLACK CHESS PAWN\r\n\u2660\t9824\t2660\t\u2660\tBLACK SPADE SUIT\r\n\u2661\t9825\t2661\t \tWHITE HEART SUIT\r\n\u2662\t9826\t2662\t \tWHITE DIAMOND SUIT\r\n\u2663\t9827\t2663\t\u2663\tBLACK CLUB SUIT\r\n\u2664\t9828\t2664\t \tWHITE SPADE SUIT\r\n\u2665\t9829\t2665\t\u2665\tBLACK HEART SUIT\r\n\u2666\t9830\t2666\t\u2666\tBLACK DIAMOND SUIT\r\n\u2667\t9831\t2667\t \tWHITE CLUB SUIT\r\n\u2668\t9832\t2668\t \tHOT SPRINGS\r\n\u2669\t9833\t2669\t \tQUARTER NOTE\r\n\u266a\t9834\t266A\t \tEIGHTH NOTE\r\n\u266b\t9835\t266B\t \tBEAMED EIGHTH NOTES\r\n\u266c\t9836\t266C\t \tBEAMED SIXTEENTH NOTES\r\n\u266d\t9837\t266D\t \tMUSIC FLAT SIGN\r\n\u266e\t9838\t266E\t \tMUSIC NATURAL SIGN\r\n\u266f\t9839\t266F\t \tMUSIC SHARP SIGN\r\n\u2670\t9840\t2670\t \tWEST SYRIAC CROSS\r\n\u2671\t9841\t2671\t \tEAST SYRIAC CROSS\r\n\u2672\t9842\t2672\t \tUNIVERSAL RECYCLING SYMBOL\r\n\u2673\t9843\t2673\t \tRECYCLING SYMBOL FOR TYPE-1 PLASTICS\r\n\u2674\t9844\t2674\t \tRECYCLING SYMBOL FOR TYPE-2 PLASTICS\r\n\u2675\t9845\t2675\t \tRECYCLING SYMBOL FOR TYPE-3 PLASTICS\r\n\u2676\t9846\t2676\t \tRECYCLING SYMBOL FOR TYPE-4 PLASTICS\r\n\u2677\t9847\t2677\t \tRECYCLING SYMBOL FOR TYPE-5 PLASTICS\r\n\u2678\t9848\t2678\t \tRECYCLING SYMBOL FOR TYPE-6 PLASTICS\r\n\u2679\t9849\t2679\t \tRECYCLING SYMBOL FOR TYPE-7 PLASTICS\r\n\u267a\t9850\t267A\t \tRECYCLING SYMBOL FOR GENERIC MATERIALS\r\n\u267b\t9851\t267B\t \tBLACK UNIVERSAL RECYCLING SYMBOL\r\n\u267c\t9852\t267C\t \tRECYCLED PAPER SYMBOL\r\n\u267d\t9853\t267D\t \tPARTIALLY-RECYCLED PAPER SYMBOL\r\n\u267e\t9854\t267E\t \tPERMANENT PAPER SIGN\r\n\u267f\t9855\t267F\t \tWHEELCHAIR SYMBOL\r\n\u2680\t9856\t2680\t \tDIE FACE-1\r\n\u2681\t9857\t2681\t \tDIE FACE-2\r\n\u2682\t9858\t2682\t \tDIE FACE-3\r\n\u2683\t9859\t2683\t \tDIE FACE-4\r\n\u2684\t9860\t2684\t \tDIE FACE-5\r\n\u2685\t9861\t2685\t \tDIE FACE-6\r\n\u2686\t9862\t2686\t \tWHITE CIRCLE WITH DOT RIGHT\r\n\u2687\t9863\t2687\t \tWHITE CIRCLE WITH TWO DOTS\r\n\u2688\t9864\t2688\t \tBLACK CIRCLE WITH WHITE DOT RIGHT\r\n\u2689\t9865\t2689\t \tBLACK CIRCLE WITH TWO WHITE DOTS\r\n\u268a\t9866\t268A\t \tMONOGRAM FOR YANG\r\n\u268b\t9867\t268B\t \tMONOGRAM FOR YIN\r\n\u268c\t9868\t268C\t \tDIGRAM FOR GREATER YANG\r\n\u268d\t9869\t268D\t \tDIGRAM FOR LESSER YIN\r\n\u268e\t9870\t268E\t \tDIGRAM FOR LESSER YANG\r\n\u268f\t9871\t268F\t \tDIGRAM FOR GREATER YIN\r\n\u2690\t9872\t2690\t \tWHITE FLAG\r\n\u2691\t9873\t2691\t \tBLACK FLAG\r\n\u2692\t9874\t2692\t \tHAMMER AND PICK\r\n\u2693\t9875\t2693\t \tANCHOR\r\n\u2694\t9876\t2694\t \tCROSSED SWORDS\r\n\u2695\t9877\t2695\t \tSTAFF OF AESCULAPIUS\r\n\u2696\t9878\t2696\t \tSCALES\r\n\u2697\t9879\t2697\t \tALEMBIC\r\n\u2698\t9880\t2698\t \tFLOWER\r\n\u2699\t9881\t2699\t \tGEAR\r\n\u269a\t9882\t269A\t \tSTAFF OF HERMES\r\n\u269b\t9883\t269B\t \tATOM SYMBOL\r\n\u269c\t9884\t269C\t \tFLEUR-DE-LIS\r\n\u269d\t9885\t269D\t \tOUTLINED WHITE STAR\r\n\u269e\t9886\t269E\t \tTHREE LINES CONVERGING RIGHT\r\n\u269f\t9887\t269F\t \tTHREE LINES CONVERGING LEFT\r\n\u26a0\t9888\t26A0\t \tWARNING SIGN\r\n\u26a1\t9889\t26A1\t \tHIGH VOLTAGE SIGN\r\n\u26a2\t9890\t26A2\t \tDOUBLED FEMALE SIGN\r\n\u26a3\t9891\t26A3\t \tDOUBLED MALE SIGN\r\n\u26a4\t9892\t26A4\t \tINTERLOCKED FEMALE AND MALE SIGN\r\n\u26a5\t9893\t26A5\t \tMALE AND FEMALE SIGN\r\n\u26a6\t9894\t26A6\t \tMALE WITH STROKE SIGN\r\n\u26a7\t9895\t26A7\t \tMALE WITH STROKE AND MALE AND FEMALE SIGN\r\n\u26a8\t9896\t26A8\t \tVERTICAL MALE WITH STROKE SIGN\r\n\u26a9\t9897\t26A9\t \tHORIZONTAL MALE WITH STROKE SIGN\r\n\u26aa\t9898\t26AA\t \tMEDIUM WHITE CIRCLE\r\n\u26ab\t9899\t26AB\t \tMEDIUM BLACK CIRCLE\r\n\u26ac\t9900\t26AC\t \tMEDIUM SMALL WHITE CIRCLE\r\n\u26ad\t9901\t26AD\t \tMARRIAGE SYMBOL\r\n\u26ae\t9902\t26AE\t \tDIVORCE SYMBOL\r\n\u26af\t9903\t26AF\t \tUNMARRIED PARTNERSHIP SYMBOL\r\n\u26b0\t9904\t26B0\t \tCOFFIN\r\n\u26b1\t9905\t26B1\t \tFUNERAL URN\r\n\u26b2\t9906\t26B2\t \tNEUTER\r\n\u26b3\t9907\t26B3\t \tCERES\r\n\u26b4\t9908\t26B4\t \tPALLAS\r\n\u26b5\t9909\t26B5\t \tJUNO\r\n\u26b6\t9910\t26B6\t \tVESTA\r\n\u26b7\t9911\t26B7\t \tCHIRON\r\n\u26b8\t9912\t26B8\t \tBLACK MOON LILITH\r\n\u26b9\t9913\t26B9\t \tSEXTILE\r\n\u26ba\t9914\t26BA\t \tSEMISEXTILE\r\n\u26bb\t9915\t26BB\t \tQUINCUNX\r\n\u26bc\t9916\t26BC\t \tSESQUIQUADRATE\r\n\u26bd\t9917\t26BD\t \tSOCCER BALL\r\n\u26be\t9918\t26BE\t \tBASEBALL\r\n\u26bf\t9919\t26BF\t \tSQUARED KEY\r\n\u26c0\t9920\t26C0\t \tWHITE DRAUGHTS MAN\r\n\u26c1\t9921\t26C1\t \tWHITE DRAUGHTS KING\r\n\u26c2\t9922\t26C2\t \tBLACK DRAUGHTS MAN\r\n\u26c3\t9923\t26C3\t \tBLACK DRAUGHTS KING\r\n\u26c4\t9924\t26C4\t \tSNOWMAN WITHOUT SNOW\r\n\u26c5\t9925\t26C5\t \tSUN BEHIND CLOUD\r\n\u26c6\t9926\t26C6\t \tRAIN\r\n\u26c7\t9927\t26C7\t \tBLACK SNOWMAN\r\n\u26c8\t9928\t26C8\t \tTHUNDER CLOUD AND RAIN\r\n\u26c9\t9929\t26C9\t \tTURNED WHITE SHOGI PIECE\r\n\u26ca\t9930\t26CA\t \tTURNED BLACK SHOGI PIECE\r\n\u26cb\t9931\t26CB\t \tWHITE DIAMOND IN SQUARE\r\n\u26cc\t9932\t26CC\t \tCROSSING LANES\r\n\u26cd\t9933\t26CD\t \tDISABLED CAR\r\n\u26ce\t9934\t26CE\t \tOPHIUCHUS\r\n\u26cf\t9935\t26CF\t \tPICK\r\n\u26d0\t9936\t26D0\t \tCAR SLIDING\r\n\u26d1\t9937\t26D1\t \tHELMET WITH WHITE CROSS\r\n\u26d2\t9938\t26D2\t \tCIRCLED CROSSING LANES\r\n\u26d3\t9939\t26D3\t \tCHAINS\r\n\u26d4\t9940\t26D4\t \tNO ENTRY\r\n\u26d5\t9941\t26D5\t \tALTERNATE ONE-WAY LEFT WAY TRAFFIC\r\n\u26d6\t9942\t26D6\t \tBLACK TWO-WAY LEFT WAY TRAFFIC\r\n\u26d7\t9943\t26D7\t \tWHITE TWO-WAY LEFT WAY TRAFFIC\r\n\u26d8\t9944\t26D8\t \tBLACK LEFT LANE MERGE\r\n\u26d9\t9945\t26D9\t \tWHITE LEFT LANE MERGE\r\n\u26da\t9946\t26DA\t \tDRIVE SLOW SIGN\r\n\u26db\t9947\t26DB\t \tHEAVY WHITE DOWN-POINTING TRIANGLE\r\n\u26dc\t9948\t26DC\t \tLEFT CLOSED ENTRY\r\n\u26dd\t9949\t26DD\t \tSQUARED SALTIRE\r\n\u26de\t9950\t26DE\t \tFALLING DIAGONAL IN WHITE CIRCLE IN BLACK SQUARE\r\n\u26df\t9951\t26DF\t \tBLACK TRUCK\r\n\u26e0\t9952\t26E0\t \tRESTRICTED LEFT ENTRY-1\r\n\u26e1\t9953\t26E1\t \tRESTRICTED LEFT ENTRY-2\r\n\u26e2\t9954\t26E2\t \tASTRONOMICAL SYMBOL FOR URANUS\r\n\u26e3\t9955\t26E3\t \tHEAVY CIRCLE WITH STROKE AND TWO DOTS ABOVE\r\n\u26e4\t9956\t26E4\t \tPENTAGRAM\r\n\u26e5\t9957\t26E5\t \tRIGHT-HANDED INTERLACED PENTAGRAM\r\n\u26e6\t9958\t26E6\t \tLEFT-HANDED INTERLACED PENTAGRAM\r\n\u26e7\t9959\t26E7\t \tINVERTED PENTAGRAM\r\n\u26e8\t9960\t26E8\t \tBLACK CROSS ON SHIELD\r\n\u26e9\t9961\t26E9\t \tSHINTO SHRINE\r\n\u26ea\t9962\t26EA\t \tCHURCH\r\n\u26eb\t9963\t26EB\t \tCASTLE\r\n\u26ec\t9964\t26EC\t \tHISTORIC SITE\r\n\u26ed\t9965\t26ED\t \tGEAR WITHOUT HUB\r\n\u26ee\t9966\t26EE\t \tGEAR WITH HANDLES\r\n\u26ef\t9967\t26EF\t \tMAP SYMBOL FOR LIGHTHOUSE\r\n\u26f0\t9968\t26F0\t \tMOUNTAIN\r\n\u26f1\t9969\t26F1\t \tUMBRELLA ON GROUND\r\n\u26f2\t9970\t26F2\t \tFOUNTAIN\r\n\u26f3\t9971\t26F3\t \tFLAG IN HOLE\r\n\u26f4\t9972\t26F4\t \tFERRY\r\n\u26f5\t9973\t26F5\t \tSAILBOAT\r\n\u26f6\t9974\t26F6\t \tSQUARE FOUR CORNERS\r\n\u26f7\t9975\t26F7\t \tSKIER\r\n\u26f8\t9976\t26F8\t \tICE SKATE\r\n\u26f9\t9977\t26F9\t \tPERSON WITH BALL\r\n\u26fa\t9978\t26FA\t \tTENT\r\n\u26fb\t9979\t26FB\t \tJAPANESE BANK SYMBOL\r\n\u26fc\t9980\t26FC\t \tHEADSTONE GRAVEYARD SYMBOL\r\n\u26fd\t9981\t26FD\t \tFUEL PUMP\r\n\u26fe\t9982\t26FE\t \tCUP ON BLACK SQUARE\r\n\u26ff\t9983\t26FF\t \tWHITE FLAG WITH HORIZONTAL MIDDLE BLACK STRIPE",
+            "owner": "admin",
+            "timestamp": 1447142503,
+            "title": "Es klappt sogar UTF-8!",
+            "truncated": false
+          },
+          "ja": {
+            "alias": "ja",
+            "content": "Sie funktionieren! :)",
+            "owner": "luk",
+            "timestamp": 123456789,
+            "title": "Ja!",
+            "truncated": false
+          },
+          "link": {
+            "alias": "link",
+            "content": "</pre><a href='http://google.com'>google</a><script src=\"//foo.bar/evil.js\"></script><pre>",
+            "owner": "admin",
+            "timestamp": 1447069137,
+            "title": "Und HTML-Injection geht nicht...",
+            "truncated": false
+          },
+          "nein": {
+            "alias": "nein",
+            "content": "PHP ist voll toll! :)",
+            "owner": "luk",
+            "timestamp": 123456789,
+            "title": "Nein",
+            "truncated": true
+          },
+          "nein2": {
+            "alias": "nein2",
+            "content": "Oh, uups.\r\nTun sie ja wohl...",
+            "owner": "luk",
+            "timestamp": 123456789,
+            "title": "Nein",
+            "truncated": false
+          }
+        },
+        "title": "Funktionieren Diskussionen?",
+        "truncated": false
+      },
+      "geloescht": {
+        "alias": "geloescht",
+        "articles": {},
+        "title": "Diese Diskussion ist gel\u00f6scht.",
+        "truncated": true
+      }
+    },
+    "name": "Thema 1"
+  },
+  "thema-2": {
+    "alias": "thema-2",
+    "discussions": {
+      "diskussion-1": {
+        "alias": "diskussion-1",
+        "articles": {
+          "beitrag-1": {
+            "alias": "beitrag-1",
+            "content": "Testinhalt",
+            "owner": "admin",
+            "timestamp": 1447070309,
+            "title": "Beitrag 1",
+            "truncated": false
+          }
+        },
+        "title": "Diskussion 1",
+        "truncated": false
+      }
+    },
+    "name": "Thema 2"
+  },
+  "thema-3": {
+    "alias": "thema-3",
+    "discussions": {
+      "a": {
+        "alias": "a",
+        "articles": {
+          "a": {
+            "alias": "a",
+            "content": "a",
+            "owner": "admin",
+            "timestamp": 1447147722,
+            "title": "a",
+            "truncated": false
+          }
+        },
+        "title": "a",
+        "truncated": true
+      },
+      "b": {
+        "alias": "b",
+        "articles": {
+          "b": {
+            "alias": "b",
+            "content": "b",
+            "owner": "admin",
+            "timestamp": 1447147792,
+            "title": "b",
+            "truncated": false
+          }
+        },
+        "title": "b",
+        "truncated": true
+      },
+      "diskussion-3": {
+        "alias": "diskussion-3",
+        "articles": {
+          "2": {
+            "alias": "2",
+            "content": "2",
+            "owner": "user",
+            "timestamp": 1447146245,
+            "title": "2",
+            "truncated": false
+          },
+          "beitrag": {
+            "alias": "beitrag",
+            "content": "Benutzer (normal)",
+            "owner": "user",
+            "timestamp": 1447146203,
+            "title": "Beitrag",
+            "truncated": true
+          },
+          "beitrag-1": {
+            "alias": "beitrag-1",
+            "content": "Bla bla bla",
+            "owner": "admin",
+            "timestamp": 1447146142,
+            "title": "Beitrag 1",
+            "truncated": false
+          }
+        },
+        "title": "Diskussion 3",
+        "truncated": true
+      }
+    },
+    "name": "Thema 3"
+  }
+}

@@ -1,16 +1,43 @@
-window.onload = function () {
-    var element_btn = document.getElementById("idKnopf");
-    element_btn.onclick = switchView_p;
-}
+$(function(){
+    $("div.hidden-form form, div.hidden-form .hide-form").hide();
+    $("div.hidden-form .show-form").click(function(e){
+        e.preventDefault();
+        var div = $(this).closest("div.hidden-form");
+        div.find("form, .hide-form").show();
+        div.find(".show-form").hide();
+        div.css({display: "block"});
+    });
+    $("div.hidden-form .hide-form").click(function(e){
+        e.preventDefault();
+        var div = $(this).closest("div.hidden-form");
+        div.find(".show-form").show();
+        div.find("form, .hide-form").hide();
+        div.css({display: "inline-block"});
+    });
 
-function switchView_p () {
-    var element1_o = document.getElementById("idTabelle1");
-    var element2_o = document.getElementById("idTabelle2");
-    if (element1_o.style.display != "none") {
-        element1_o.style.display = "none";
-        element2_o.style.display = "table";
-    } else {
-        element2_o.style.display = "none";
-        element1_o.style.display = "table";
-    }
-}
+    //$("button.btn-edit").text("⛭");
+    //$("input.btn-edit").val("⛭");
+    //$("button.btn-delete").text("☓");
+    //$("input.btn-delete").val("☓");
+
+    $("form").submit(function(e){
+        $(this).find("input.required, textarea.required, select.required").each(function(){
+            if( $(this).val() == "" )
+            {
+                $(this).addClass("error");
+                e.preventDefault();
+            }
+            else
+            {
+                $(this).removeClass("error");
+            }
+        });
+    });
+
+    $(".btn-delete").click(function(e){
+        if( !confirm("Wirklich löschen?") )
+        {
+            e.preventDefault()
+        }
+    });
+})

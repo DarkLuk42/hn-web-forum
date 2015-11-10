@@ -1,0 +1,10 @@
+# coding: utf-8
+<ul id="breadcrumb">
+    <li><a href="/">Themen</a></li>
+    %if theme:
+        <li><a href="/${theme['alias']}">${theme['name']}</a></li>
+        %if discussion:
+            <li><a href="/${theme['alias']}/${discussion['alias']}">${discussion['title']}</a></li>
+        %endif
+    %endif
+</ul>

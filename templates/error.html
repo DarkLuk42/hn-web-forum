@@ -1,0 +1,12 @@
+# coding: utf-8
+<%inherit file="layout/default.html"/>
+
+<%block name="title">Error</%block>
+<%block name="content">
+    %if status is not None:
+        <h1>${status}</h1>
+    %endif
+    <p class="message message-error">
+         ${error_message}
+    </p>
+</%block>

@@ -1,0 +1,28 @@
+# coding: utf-8
+<%inherit file="layout/default.html"/>
+
+<%block name="title">${theme["name"]}</%block>
+<%block name="content">
+    <h1>${theme["name"]}</h1>
+    <p>
+        Hier sind alle Diskussionen aus dem Thema '${theme['name']}' aufgelistet.
+    </p>
+    <ul>
+        %for discussion in theme["discussions"]:
+            %if theme["discussions"][discussion]["truncated"] == False:
+                <li><a href="/${theme['alias']}/${discussion}">${theme["discussions"][discussion]["title"]|h}</a></li>
+            %elif userrole == "ADMIN":
+                <li class="truncated"><a href="/${theme['alias']}/${discussion}">${theme["discussions"][discussion]["title"]|h}</a> (gelöscht)</li>
+            %endif
+        %endfor
+    </ul>
+    %if userrole == "USER" or userrole == "ADMIN":
+        <form action="/create_discussion" method="post">
+            <input type="hidden" name="theme" value="${theme['alias']}">
+            <input type="text" name="title" placeholder="Titel" class="required"/>
+            <input type="text" name="article_title" placeholder="Beitrag" class="required"/>
+            <textarea name="article_content" placeholder="Inhalt" class="required"></textarea>
+            <input type="submit" value="Diskussion starten"/>
+        </form>
+    %endif
+</%block>
