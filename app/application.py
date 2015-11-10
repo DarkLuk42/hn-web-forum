@@ -308,10 +308,13 @@ class Application(object):
 
     def login(self, **kwargs):
         if "user" in kwargs:
-            user = self.repository.find_user(kwargs["user"])
-            if "password" in kwargs and user["password"] == kwargs["password"]:
-                cherrypy.session["user"] = user
-                Application.redirect("/", "Du hast dich erfolgreich eingeloggt!")
+            try:
+                user = self.repository.find_user(kwargs["user"])
+                if "password" in kwargs and user["password"] == kwargs["password"]:
+                    cherrypy.session["user"] = user
+                    Application.redirect("/", "Du hast dich erfolgreich eingeloggt!")
+            except:
+                pass
         Application.redirect("/", "Der login ist fehlgeschlagen!")
     login.exposed = True
 
@@ -511,6 +514,20 @@ class Application(object):
         cherrypy.session["user"] = None
         Application.redirect("/", "Du hast dich erfolgreich ausgeloggt!")
     logout.exposed = True
+
+    @staticmethod
+    def handle_error():
+        error = cherrypy._cperror
+        cherrypy.response.status = 500
+        cherrypy.response.body = error.message #render_template("error")
+
+    @staticmethod
+    def error_page_403(status, message, traceback, version):
+        return render_template("error", status=status, error_message=message)
+
+    @staticmethod
+    def error_page_404(status, message, traceback, version):
+        return render_template("error", status=status, error_message=message)
 
     def default(self, *arglist, **kwargs):
         arglist = list(filter(None, arglist))

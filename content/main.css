@@ -184,6 +184,10 @@ textarea
     border: 1px solid black;
     border-radius: 8px;
 }
+.message-error
+{
+    background-color: #FF9999;
+}
 
 hr
 {

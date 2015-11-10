@@ -46,9 +46,11 @@
                     </td>
                     <td>
                         <strong>${discussion["articles"][article]["title"]|h}</strong>
-                        <p>
-                            ${discussion["articles"][article]["content"]|h}
-                        </p>
+                        %if discussion["articles"][article]["content"][:1] == "~":
+                            <pre>${discussion["articles"][article]["content"][1:]|h}</pre>
+                        %else:
+                            <p>${discussion["articles"][article]["content"]|h}</p>
+                        %endif
                         %if userrole == "ADMIN" or (userrole == "USER" and username == discussion["articles"][article]["owner"] and discussion["articles"][article]["alias"] == last_article["alias"]):
                             <hr>
                             <div>

@@ -27,7 +27,10 @@ def main():
             'tools.sessions.storage_path': './data/sessions',
             'tools.sessions.timeout': 10,
             'tools.encode.on': True,
-            'tools.encode.encoding': "utf-8"
+            'tools.encode.encoding': "utf-8",
+            'request.error_response': application.Application.handle_error,
+            'error_page.403': application.Application.error_page_403,
+            'error_page.404': application.Application.error_page_404
         }
     }
     # Mount static content handler

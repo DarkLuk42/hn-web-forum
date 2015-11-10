@@ -12,8 +12,10 @@
             <li><a href="/${theme}">${themes[theme]["name"]|h}</a></li>
         %endfor
     </ul>
-    <form action="/create_theme" method="post">
-        <input type="text" name="name" class="required"/>
-        <input type="submit" value="Thema anlegen"/>
-    </form>
+    %if userrole == "ADMIN":
+        <form action="/create_theme" method="post">
+            <input type="text" name="name" class="required" placeholder="Bezeichnung des Themas"/>
+            <input type="submit" value="Thema anlegen"/>
+        </form>
+    %endif
 </%block>
