@@ -1,18 +1,26 @@
 # Dokumentation Praktikumsprojekt Forum
-Dokumentation vom 09.11.2015 <br />
-Praktikumsgruppe: E <br />
-Team: Lukas Quast, Frederic Wagner <br />
+    Dokumentation vom 09.11.2015
+    Praktikumsgruppe: E
+    Team: Lukas Quast, Frederic Wagner
+
+## Inhalt:
+- Allgemeine Beschreibung
+- Beschreibung der Komponenten
+- API
+- Datenablage
+- Konfiguration
+- Durchführung und Ergebnis der geforderten Prüfungen
 
 ## Allgemeine Beschreibung:
- Das Projekt "Forum" ist eine Client-Server-Anwendung zur Darstellung einzelner Webseiten und Formulare, die per Template-Engine **_mako_** erzeugt werden. <br />
- Nutzung des Frameworks **_cherrypy_** für den Server. Die Präsentation des Projektes erfolgt per **_CSS_**. <br />
- Zum Speichern der Daten des Forums (Themen, Diskussionen und Beiträge) und der Konten der Benutzer werden **_JSON_**-Dateien genutzt.<br />
+    Das Projekt "Forum" ist eine Client-Server-Anwendung zur Darstellung einzelner Webseiten und Formulare, die per Template-Engine **_mako_** erzeugt werden.
+    Nutzung des Frameworks **_cherrypy_** für den Server. Die Präsentation des Projektes erfolgt per **_CSS_**.
+    Zum Speichern der Daten des Forums (Themen, Diskussionen und Beiträge) und der Konten der Benutzer werden **_JSON_**-Dateien genutzt.
 
 ## Beschreibung der Komponenten:
 - ### Class Repository:
-    + Zweck <br />
+    + Zweck: \
         Klasse, die Methoden zum Laden, Erstellen, Löschen und Sortieren von Usern, Themen, Diskussionen und Beiträgen enthält.
-    + Aufbau <br />
+    + Aufbau:
         + init(self)
         + load_themes
         + load_users
@@ -31,140 +39,138 @@ Team: Lukas Quast, Frederic Wagner <br />
 ### Methoden der Class Repository:
 
 - **init(self)**
-    + Zweck: <br />
+    + Zweck: \
         Initialisieren der Komponenten, laden der Themen, User und sortieren der Themen.
 
 - **load_themes**
-    + Zweck: <br />
+    + Zweck: \
         Laden aller Themen aus JSON-Datei.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: '__init__'
 
 - **load_users**
-    + Zweck: <br />
+    + Zweck: \
         Laden der User aus JSON-Datei.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: '__init__'
 
 - **sort_themes**
-    + Zweck: <br />
+    + Zweck: \
         Initiales Sortieren der Themen zur Anzeige.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: '__init__'
 
 - **get_themes**
-    + Zweck: <br />
+    + Zweck: \
         Gibt die Themen zurück.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: '**index**'
 
 - **find_theme**
-    + Zweck: <br />
+    + Zweck: \
         Gibt ein angegebenes Thema zurück oder eine Fehlerseite, wenn dieses nicht verfügbar ist.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **disscussion**, **theme**, **create_discussion**, **find_discussion**
 
 - **find_discussion**
-    + Zweck: <br />
+    + Zweck: \
         Gibt eine angegebene Diskussion zurück oder eine Fehlerseite, wenn diese nicht verfügbar ist.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **delete_article**, **discussion**, **update_article**, **create_article**, **delete_discussion**, **find_article**, **update_discussion**
 - **find_article**
-    + Zweck: <br />
+    + Zweck: \
         Gibt einen angegebenen Beitrag zurück oder eine Fehlerseite, wenn nicht dieser nicht verfügbar ist.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **delete_article**, **update_article**
 
 - **get_users**
-    + Zweck <br />
+    + Zweck \
         Gibt die Benutzer zurück
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **users**
 
 - **find_user**
-    + Zweck: <br />
+    + Zweck: \
         Gibt einen angegebenen Benutzer zurück oder eine Fehlerseite, wenn dieser nicht verfügbar ist.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **login**, **delete_user**, **update_user**
 
 - **create_theme**
-    + Zweck: <br />
+    + Zweck: \
         Erstellt ein neues Thema mit den angegebenen Informationen.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **create_theme**
 
 - **create_discussion**
-    + Zweck: <br />
+    + Zweck: \
         Erstellt eine neue Diskussion mit den angegebenen Informationen.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **create_discussion**
 
 - **create_article**
-    + Zweck: <br />
+    + Zweck: \
         Erstellt einen neuen Beitrag mit den angegebenen Informationen.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **create_article**
 
 - **delete_discussion**
-    + Zweck: <br />
+    + Zweck: \
         Entfernt die angegebene Diskussion, anschließend erneute Sortierung der Datenstruktur.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **delete_discussion**
 
 - **delete_article**
-    + Zweck: <br />
+    + Zweck: \
         Entfernt den angegebenen Beitrag, anschließend erneute Sortierung der Datenstruktur.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **delete_article**
 
 - **update_discussion**
-    + Zweck: <br />
+    + Zweck: \
         Verändert die Eigenschaften einer Diskussion laut Angabe, anschließénd erneute Sortierung der Datenstruktur.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **update_discussion**
 
 - **update_article**
-    + Zweck: <br />
+    + Zweck: \
         Verändert die Eigenschaften eines Beitrags laut Angabe, anschließénd erneute Sortierung der Datenstruktur.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **update_article**
 
 - **create_user**
-    + Zweck: <br />
+    + Zweck: \
         Erstellt einen neuen Benutzer mit den angegebenen Informationen, anschließende Speicherung der Datenstruktur.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **create_user**
 
 - **update_user**
-    + Zweck: <br />
+    + Zweck: \
         Verändert die Eigenschaften eines Benutzers laut Angabe, anschließénd erneute Sortierung der Datenstruktur.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **update_user**
 
 - **delete_user**
-    + Zweck: <br />
+    + Zweck: \
         Entfernt den angegebenen Benutzer, anschließende Speicherung der Datenstruktur.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **delete_user**
 
 - **save_themes**
-    + Zweck: <br />
+    + Zweck: \
         Speichert die Datenstruktur in die entsprechende JSON-Datei.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **create_article**, **create_discussion**, **create_theme**, **delete_article**, **delete_discussion**, **update_article** **update discussion**
 
 - **save_users**
-    + Zweck: <br />
+    + Zweck: \
         Speichert die Datenstruktur in die entsprechende JSON-Datei.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **create_users**, **delete_users**, **update_users**
 
-<br />
-
 - ### Class Application:
-    + Zweck: <br />
+    + Zweck: \
         Klasse, die Methoden bereitstellt um die Seiten und Aktionen auf diesen zu definieren und auszuführen
-    + Aufbau: <br />
+    + Aufbau:
         + init(self)
         + redirect
         + get_user
@@ -193,142 +199,140 @@ Team: Lukas Quast, Frederic Wagner <br />
 ### Methoden der Class Application:
 
 - **init(self)**
-    + Zweck: <br />
+    + Zweck: \
         Initialisierung mit Zuordnung des Repository
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **main**
 
 - **redirect**
-    + Zweck: <br />
+    + Zweck: \
         Weiterleitung an angegebenen Pfad.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **create_user**, **create_article**, **create_article**, **create_discussion**, **delete_acticle**, **delete_discussion**, **delete_user**, **discussion**, **login**, **logout**, **update_article**, **update_discussion**, **update_user**
 
 - **get_user**
-    + Zweck: <br />
+    + Zweck: \
         Gibt den Benutzer aus der Session zurück.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **render_template**
 
 - **get_username**
-    + Zweck: <br />
+    + Zweck: \
         Gibt den Benutzernamen zu einem bestimmten Benutzer aus der Session zurück.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **render_template**, **delete_article**, **update_article**, **create_article**, **create_discussion**
 
 - **get_userrole**
-    + Zweck: <br />
+    + Zweck: \
         Gibt die Benutzerrolle zu einem bestimmten Benutzer aus der Sessiuon zurück.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **render_template**, **delete_article**, **proof_admin**, **proof_user**, **update_article**
 
 - **proof_admin**
-    + Zweck: <br />
+    + Zweck: \
         Prüft ob der aktuelle Benutzer die passende Benutzerrolle für eine Aktion besitzt, also ob er Administrator ist.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **create_theme**, **create_user**, **delete_discussion**, **delete_user**, **update_discussion**, **update_user**
 
 - **proof_user**
-    + Zweck: <br />
+    + Zweck: \
         Prüft ob der aktuelle Benutzer die passende Benutzerrolle für eine Aktion besitzt.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **create_article**, **create_discussion**, **delete_article**, **update_article**
 
 - **index**
-    + Zweck: <br />
+    + Zweck: \
         Erzeugt die Startseite per Template-Engine.
 
 - **theme**
-    + Zweck: <br />
+    + Zweck: \
         Erzeugt die Themenseite per Template-Engine.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **default**
 
 - **discussion**
-    + Zweck: <br />
+    + Zweck: \
         Erzeugt die Seite für Diskussionen zu einem Thema per Template-Engine.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **default**
 
 - **users**
-    + Zweck: <br />
+    + Zweck: \
         Erzeugt die Benutzerseite per Template-Engine-
 
 - **login**
-    + Zweck: <br />
+    + Zweck: \
         Überprüft die eingegebenen Anmeldedaten des Benutzers.
 
 - **create_theme**
-    + Zweck: <br />
+    + Zweck: \
         Erstellt ein neues Thema.
 
 - **create_discussion**
-    + Zweck: <br />
+    + Zweck: \
         Erstellt eine neue Diskussion in einem Thema.
 
 - **create_article**
-    + Zweck: <br />
+    + Zweck: \
         Erstellt einen neuen Beitrag in einer Diskussion.
 
 - **delete_discussion**
-    + Zweck: <br />
+    + Zweck: \
         Entfernt die jeweilige Diskussion.
 
 - **delete_article**
-    + Zweck: <br />
+    + Zweck: \
         Entfernt den jeweiligen Beitrag
 
 - **update_discusssion**
-    + Zweck: <br />
+    + Zweck: \
         Ändert die jeweilige Diskussion gemäß der Angaben.
 
 - **update_article**
-    + Zweck: <br />
+    + Zweck: \
         Ändert den jeweiligen Beitrag gemäß der Angaben.
 
 - **create_user**
-    + Zweck: <br />
+    + Zweck: \
         Erstellt einen neuen Benutzer gemäß der Angaben.
 
 - **update_user**
-    + Zweck: <br />
+    + Zweck: \
         Ändert die Daten eines Benutzers gemäß der Angaben.
 
 - **delete_user**
-    + Zweck: <br />
+    + Zweck: \
         Entfernt einen Benutzer aus der Struktur.
 
 - **logout**
-    + Zweck: <br />
+    + Zweck: \
         Setzt den aktuellen User der Session auf None und logt den Benutzer somit aus.
 
 - **default**
-    + Zweck: <br />
+    + Zweck: \
         Methode, die Aufgerufen wird, wenn keine andere Aufgerufen werden kann.
-
-<br />
 
 ### Globale Methoden:
 
 - #### render_template(template_name, *args, **data)
-    + Zweck: <br />
+    + Zweck: \
         Globale Methode, die mit den ggegebenen Daten das Rendern des Templates anstößt.
-    + Zusammenwirken mit anderen Komponenten:
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **discussion**, **index**, **theme**, **users**
 
 - #### get_alias(name,** **data)
-    + Zweck: <br />
+    + Zweck: \
         Globale Methode zum ersetzen der Umlaute und Symbole um Fehler beim Zugriff auf Unterseiten abzufangen.
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **create_article**, **create_discussion**, **create_theme**
 
 - #### format_time
-    + Zweck: <br />
+    + Zweck: \
         Formatiert den TimeStamp
-    + Zusammenwirken mit anderen Komponenten: <br />
+    + Zusammenwirken mit anderen Komponenten: \
         Aufruf in: **render_template**
 
-## API
+## API:
 + `/login`
     - required parameters - (`user`, `password`)
 + `/logout`
