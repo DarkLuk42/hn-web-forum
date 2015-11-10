@@ -1,9 +1,9 @@
 {
-  "a": {
-    "alias": "a",
-    "name": "a",
-    "password": "b",
-    "role": "USER"
+  "pooruser": {
+    "alias": "pooruser",
+    "name": "poor User",
+    "password": "012345",
+    "role": "USER_READONLY"
   },
   "admin": {
     "alias": "admin",
