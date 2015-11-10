@@ -36,7 +36,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>Das Projekt &quot;Forum&quot; ist eine Client-Server-Anwendung zur Darstellung einzelner Webseiten und Formulare, die per Template-Engine <strong><em>mako</em></strong> erzeugt werden. <br /> Nutzung des Frameworks <strong><em>cherrypy</em></strong> für den Server. Die Präsentation des Projektes erfolgt per <strong><em>CSS</em></strong>. <br /> Zum Speichern der Daten des Forums (Themen, Diskussionen und Beiträge) und der Konten der Benutzer werden <strong><em>JSON</em></strong>-Dateien genutzt.<br /></p>
 <h2 id="beschreibung-der-komponenten">Beschreibung der Komponenten:</h2>
 <ul>
-<li><strong>Class Repository:</strong>
+<li><h3 id="class-repository">Class Repository:</h3>
 <ul>
 <li>Zweck <br /> Klasse, die Methoden zum Laden, Erstellen, Löschen und Sortieren von Usern, Themen, Diskussionen und Beiträgen enthält.</li>
 <li>Aufbau <br />
@@ -57,13 +57,124 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li>save_users</li>
 </ul></li>
 </ul></li>
+</ul>
+<h3 id="methoden-der-class-repository">Methoden der Class Repository:</h3>
+<ul>
 <li><strong>init(self)</strong>
 <ul>
-<li>Zweck: <br /> Initialisieren der Komponenten, laden der Themen, User und sortieren der Themen</li>
+<li>Zweck: <br /> Initialisieren der Komponenten, laden der Themen, User und sortieren der Themen.</li>
 </ul></li>
-<li><strong>Class Application:</strong>
+<li><strong>load_themes</strong>
 <ul>
-<li>Zweck: <br /> Klasse, die Methoden bereitstellt um die Seiten und Aktionen auf diesen zu definieren</li>
+<li>Zweck: <br /> Laden aller Themen aus JSON-Datei.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: '<strong>init</strong>'</li>
+</ul></li>
+<li><strong>load_users</strong>
+<ul>
+<li>Zweck: <br /> Laden der User aus JSON-Datei.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: '<strong>init</strong>'</li>
+</ul></li>
+<li><strong>sort_themes</strong>
+<ul>
+<li>Zweck: <br /> Initiales Sortieren der Themen zur Anzeige.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: '<strong>init</strong>'</li>
+</ul></li>
+<li><strong>get_themes</strong>
+<ul>
+<li>Zweck: <br /> Gibt die Themen zurück.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: '<strong>index</strong>'</li>
+</ul></li>
+<li><strong>find_theme</strong>
+<ul>
+<li>Zweck: <br /> Gibt ein angegebenes Thema zurück oder eine Fehlerseite, wenn dieses nicht verfügbar ist.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>disscussion</strong>, <strong>theme</strong>, <strong>create_discussion</strong>, <strong>find_discussion</strong></li>
+</ul></li>
+<li><strong>find_discussion</strong>
+<ul>
+<li>Zweck: <br /> Gibt eine angegebene Diskussion zurück oder eine Fehlerseite, wenn diese nicht verfügbar ist.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>delete_article</strong>, <strong>discussion</strong>, <strong>update_article</strong>, <strong>create_article</strong>, <strong>delete_discussion</strong>, <strong>find_article</strong>, <strong>update_discussion</strong></li>
+</ul></li>
+<li><strong>find_article</strong>
+<ul>
+<li>Zweck: <br /> Gibt einen angegebenen Beitrag zurück oder eine Fehlerseite, wenn nicht dieser nicht verfügbar ist.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>delete_article</strong>, <strong>update_article</strong></li>
+</ul></li>
+<li><strong>get_users</strong>
+<ul>
+<li>Zweck <br /> Gibt die Benutzer zurück</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>users</strong></li>
+</ul></li>
+<li><strong>find_user</strong>
+<ul>
+<li>Zweck: <br /> Gibt einen angegebenen Benutzer zurück oder eine Fehlerseite, wenn dieser nicht verfügbar ist.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>login</strong>, <strong>delete_user</strong>, <strong>update_user</strong></li>
+</ul></li>
+<li><strong>create_theme</strong>
+<ul>
+<li>Zweck: <br /> Erstellt ein neues Thema mit den angegebenen Informationen.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>create_theme</strong></li>
+</ul></li>
+<li><strong>create_discussion</strong>
+<ul>
+<li>Zweck: <br /> Erstellt eine neue Diskussion mit den angegebenen Informationen.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>create_discussion</strong></li>
+</ul></li>
+<li><strong>create_article</strong>
+<ul>
+<li>Zweck: <br /> Erstellt einen neuen Beitrag mit den angegebenen Informationen.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>create_article</strong></li>
+</ul></li>
+<li><strong>delete_discussion</strong>
+<ul>
+<li>Zweck: <br /> Entfernt die angegebene Diskussion, anschließend erneute Sortierung der Datenstruktur.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>delete_discussion</strong></li>
+</ul></li>
+<li><strong>delete_article</strong>
+<ul>
+<li>Zweck: <br /> Entfernt den angegebenen Beitrag, anschließend erneute Sortierung der Datenstruktur.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>delete_article</strong></li>
+</ul></li>
+<li><strong>update_discussion</strong>
+<ul>
+<li>Zweck: <br /> Verändert die Eigenschaften einer Diskussion laut Angabe, anschließénd erneute Sortierung der Datenstruktur.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>update_discussion</strong></li>
+</ul></li>
+<li><strong>update_article</strong>
+<ul>
+<li>Zweck: <br /> Verändert die Eigenschaften eines Beitrags laut Angabe, anschließénd erneute Sortierung der Datenstruktur.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>update_article</strong></li>
+</ul></li>
+<li><strong>create_user</strong>
+<ul>
+<li>Zweck: <br /> Erstellt einen neuen Benutzer mit den angegebenen Informationen, anschließende Speicherung der Datenstruktur.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>create_user</strong></li>
+</ul></li>
+<li><strong>update_user</strong>
+<ul>
+<li>Zweck: <br /> Verändert die Eigenschaften eines Benutzers laut Angabe, anschließénd erneute Sortierung der Datenstruktur.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>update_user</strong></li>
+</ul></li>
+<li><strong>delete_user</strong>
+<ul>
+<li>Zweck: <br /> Entfernt den angegebenen Benutzer, anschließende Speicherung der Datenstruktur.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>delete_user</strong></li>
+</ul></li>
+<li><strong>save_themes</strong>
+<ul>
+<li>Zweck: <br /> Speichert die Datenstruktur in die entsprechende JSON-Datei.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>create_article</strong>, <strong>create_discussion</strong>, <strong>create_theme</strong>, <strong>delete_article</strong>, <strong>delete_discussion</strong>, <strong>update_article</strong> <strong>update discussion</strong></li>
+</ul></li>
+<li><strong>save_users</strong>
+<ul>
+<li>Zweck: <br /> Speichert die Datenstruktur in die entsprechende JSON-Datei.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>create_users</strong>, <strong>delete_users</strong>, <strong>update_users</strong></li>
+</ul></li>
+</ul>
+<p><br /></p>
+<ul>
+<li><h3 id="class-application">Class Application:</h3>
+<ul>
+<li>Zweck: <br /> Klasse, die Methoden bereitstellt um die Seiten und Aktionen auf diesen zu definieren und auszuführen</li>
 <li>Aufbau: <br />
 <ul>
 <li>init(self)</li>
@@ -81,21 +192,143 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li>create_theme</li>
 <li>create_discussion</li>
 <li>create_article</li>
+<li>delete_discussion</li>
+<li>delete_article</li>
+<li>update_discusssion</li>
+<li>update_article</li>
+<li>create_user</li>
+<li>update_user</li>
+<li>delete_user</li>
 <li>logout</li>
 <li>default</li>
 </ul></li>
 </ul></li>
-<li>render_template(template_name, *args, **data)
+</ul>
+<h3 id="methoden-der-class-application">Methoden der Class Application:</h3>
 <ul>
-<li>Zweck: <br /> Globale Methode, die mit den ggegebenen Daten das Rendern des Templates anstößt</li>
-<li>Aufbau: <br /></li>
-<li>Zusammenwirken mit anderen Komponenten</li>
-<li>API</li>
+<li><strong>init(self)</strong>
+<ul>
+<li>Zweck: <br /> Initialisierung mit Zuordnung des Repository</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>main</strong></li>
 </ul></li>
-<li><strong>get_alias(name,</strong> <strong>data)</strong>
+<li><strong>redirect</strong>
+<ul>
+<li>Zweck: <br /> Weiterleitung an angegebenen Pfad.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>create_user</strong>, <strong>create_article</strong>, <strong>create_article</strong>, <strong>create_discussion</strong>, <strong>delete_acticle</strong>, <strong>delete_discussion</strong>, <strong>delete_user</strong>, <strong>discussion</strong>, <strong>login</strong>, <strong>logout</strong>, <strong>update_article</strong>, <strong>update_discussion</strong>, <strong>update_user</strong></li>
+</ul></li>
+<li><strong>get_user</strong>
+<ul>
+<li>Zweck: <br /> Gibt den Benutzer aus der Session zurück.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>render_template</strong></li>
+</ul></li>
+<li><strong>get_username</strong>
+<ul>
+<li>Zweck: <br /> Gibt den Benutzernamen zu einem bestimmten Benutzer aus der Session zurück.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>render_template</strong>, <strong>delete_article</strong>, <strong>update_article</strong>, <strong>create_article</strong>, <strong>create_discussion</strong></li>
+</ul></li>
+<li><strong>get_userrole</strong>
+<ul>
+<li>Zweck: <br /> Gibt die Benutzerrolle zu einem bestimmten Benutzer aus der Sessiuon zurück.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>render_template</strong>, <strong>delete_article</strong>, <strong>proof_admin</strong>, <strong>proof_user</strong>, <strong>update_article</strong></li>
+</ul></li>
+<li><strong>proof_admin</strong>
+<ul>
+<li>Zweck: <br /> Prüft ob der aktuelle Benutzer die passende Benutzerrolle für eine Aktion besitzt, also ob er Administrator ist.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>create_theme</strong>, <strong>create_user</strong>, <strong>delete_discussion</strong>, <strong>delete_user</strong>, <strong>update_discussion</strong>, <strong>update_user</strong></li>
+</ul></li>
+<li><strong>proof_user</strong>
+<ul>
+<li>Zweck: <br /> Prüft ob der aktuelle Benutzer die passende Benutzerrolle für eine Aktion besitzt.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>create_article</strong>, <strong>create_discussion</strong>, <strong>delete_article</strong>, <strong>update_article</strong></li>
+</ul></li>
+<li><strong>index</strong>
+<ul>
+<li>Zweck: <br /> Erzeugt die Startseite per Template-Engine.</li>
+</ul></li>
+<li><strong>theme</strong>
+<ul>
+<li>Zweck: <br /> Erzeugt die Themenseite per Template-Engine.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>default</strong></li>
+</ul></li>
+<li><strong>discussion</strong>
+<ul>
+<li>Zweck: <br /> Erzeugt die Seite für Diskussionen zu einem Thema per Template-Engine.</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>default</strong></li>
+</ul></li>
+<li><strong>users</strong>
+<ul>
+<li>Zweck: <br /> Erzeugt die Benutzerseite per Template-Engine-</li>
+</ul></li>
+<li><strong>login</strong>
+<ul>
+<li>Zweck: <br /> Überprüft die eingegebenen Anmeldedaten des Benutzers.</li>
+</ul></li>
+<li><strong>create_theme</strong>
+<ul>
+<li>Zweck: <br /> Erstellt ein neues Thema.</li>
+</ul></li>
+<li><strong>create_discussion</strong>
+<ul>
+<li>Zweck: <br /> Erstellt eine neue Diskussion in einem Thema.</li>
+</ul></li>
+<li><strong>create_article</strong>
+<ul>
+<li>Zweck: <br /> Erstellt einen neuen Beitrag in einer Diskussion.</li>
+</ul></li>
+<li><strong>delete_discussion</strong>
+<ul>
+<li>Zweck: <br /> Entfernt die jeweilige Diskussion.</li>
+</ul></li>
+<li><strong>delete_article</strong>
+<ul>
+<li>Zweck: <br /> Entfernt den jeweiligen Beitrag</li>
+</ul></li>
+<li><strong>update_discusssion</strong>
+<ul>
+<li>Zweck: <br /> Ändert die jeweilige Diskussion gemäß der Angaben.</li>
+</ul></li>
+<li><strong>update_article</strong>
+<ul>
+<li>Zweck: <br /> Ändert den jeweiligen Beitrag gemäß der Angaben.</li>
+</ul></li>
+<li><strong>create_user</strong>
+<ul>
+<li>Zweck: <br /> Erstellt einen neuen Benutzer gemäß der Angaben.</li>
+</ul></li>
+<li><strong>update_user</strong>
+<ul>
+<li>Zweck: <br /> Ändert die Daten eines Benutzers gemäß der Angaben.</li>
+</ul></li>
+<li><strong>delete_user</strong>
+<ul>
+<li>Zweck: <br /> Entfernt einen Benutzer aus der Struktur.</li>
+</ul></li>
+<li><strong>logout</strong>
+<ul>
+<li>Zweck: <br /> Setzt den aktuellen User der Session auf None und logt den Benutzer somit aus.</li>
+</ul></li>
+<li><strong>default</strong>
+<ul>
+<li>Zweck: <br /> Methode, die Aufgerufen wird, wenn keine andere Aufgerufen werden kann.</li>
+</ul></li>
+</ul>
+<p><br /></p>
+<h3 id="globale-methoden">Globale Methoden:</h3>
+<ul>
+<li><h4 id="render_templatetemplate_name-args-data">render_template(template_name, *args, **data)</h4>
+<ul>
+<li>Zweck: <br /> Globale Methode, die mit den ggegebenen Daten das Rendern des Templates anstößt.</li>
+<li>Zusammenwirken mit anderen Komponenten: Aufruf in: <strong>discussion</strong>, <strong>index</strong>, <strong>theme</strong>, <strong>users</strong></li>
+</ul></li>
+<li><h4 id="get_aliasname-data">get_alias(name,** **data)</h4>
 <ul>
 <li>Zweck: <br /> Globale Methode zum ersetzen der Umlaute und Symbole um Fehler beim Zugriff auf Unterseiten abzufangen.</li>
-<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: create_article, create_discussion, create_theme</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>create_article</strong>, <strong>create_discussion</strong>, <strong>create_theme</strong></li>
+</ul></li>
+<li><h4 id="format_time">format_time</h4>
+<ul>
+<li>Zweck: <br /> Formatiert den TimeStamp</li>
+<li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>render_template</strong></li>
 </ul></li>
 </ul>
 <h2 id="datenablage">Datenablage:</h2>
@@ -133,6 +366,29 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <span class="fu">}</span>
 <span class="fu">}</span></code></pre>
 <h2 id="konfiguration">Konfiguration:</h2>
+<ul>
+<li>Statisches Verzeichnis</li>
+<li>Sessions erlaubt, Session-Storage, Session Verzeichnis</li>
+<li>Kodierung: UTF-8</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">{
+ <span class="st">&#39;/&#39;</span>: {
+            <span class="st">&#39;tools.staticdir.root&#39;</span>: current_dir,
+            <span class="co">&#39;tools.staticdir.on&#39;</span>: <span class="va">True</span>,
+            <span class="co">&#39;tools.staticdir.dir&#39;</span>: <span class="st">&#39;./content&#39;</span>,
+            <span class="co">&#39;tools.sessions.on&#39;</span>: <span class="va">True</span>,
+            <span class="co">&#39;tools.sessions.storage_type&#39;</span>: <span class="st">&quot;File&quot;</span>,
+            <span class="co">&#39;tools.sessions.storage_path&#39;</span>: <span class="st">&#39;./data/sessions&#39;</span>,
+            <span class="co">&#39;tools.sessions.timeout&#39;</span>: <span class="dv">10</span>,
+            <span class="co">&#39;tools.encode.on&#39;</span>: <span class="va">True</span>,
+            <span class="co">&#39;tools.encode.encoding&#39;</span>: <span class="st">&quot;utf-8&quot;</span>
+      }
+}</code></pre></div>
 <h2 id="durchführung-und-ergebnis-der-geforderten-prüfungen">Durchführung und Ergebnis der geforderten Prüfungen:</h2>
+<ul>
+<li>Überprüfung des Markups mittels der w3c-Validator-Dienste: <strong>Erfolgreich</strong></li>
+<li>Überprüfung des CSS mittels der w3c-Validator-Dienste: <strong>Erfolgreich</strong></li>
+<li><strong>Projekt lauffähig</strong></li>
+</ul>
 </body>
 </html>
