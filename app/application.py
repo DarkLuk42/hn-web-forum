@@ -346,7 +346,7 @@ class Application(object):
         if "theme" in kwargs and kwargs["theme"]:
             if "discussion" in kwargs and kwargs["discussion"]:
                 if "title" in kwargs and kwargs["title"]:
-                    if "title" in kwargs and kwargs["title"]:
+                    if "content" in kwargs and kwargs["content"]:
                         self.repository.create_article(
                             theme=kwargs["theme"],
                             discussion=kwargs["discussion"],

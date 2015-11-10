@@ -36,7 +36,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>Das Projekt &quot;Forum&quot; ist eine Client-Server-Anwendung zur Darstellung einzelner Webseiten und Formulare, die per Template-Engine <strong><em>mako</em></strong> erzeugt werden. <br /> Nutzung des Frameworks <strong><em>cherrypy</em></strong> für den Server. Die Präsentation des Projektes erfolgt per <strong><em>CSS</em></strong>. <br /> Zum Speichern der Daten des Forums (Themen, Diskussionen und Beiträge) und der Konten der Benutzer werden <strong><em>JSON</em></strong>-Dateien genutzt.<br /></p>
 <h2 id="beschreibung-der-komponenten">Beschreibung der Komponenten:</h2>
 <ul>
-<li><h3 id="class-repository">Class Repository:</h3>
+<li><h3>Class Repository:</h3>
 <ul>
 <li>Zweck <br /> Klasse, die Methoden zum Laden, Erstellen, Löschen und Sortieren von Usern, Themen, Diskussionen und Beiträgen enthält.</li>
 <li>Aufbau <br />
@@ -172,7 +172,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </ul>
 <p><br /></p>
 <ul>
-<li><h3 id="class-application">Class Application:</h3>
+<li><h3>Class Application:</h3>
 <ul>
 <li>Zweck: <br /> Klasse, die Methoden bereitstellt um die Seiten und Aktionen auf diesen zu definieren und auszuführen</li>
 <li>Aufbau: <br />
@@ -315,20 +315,69 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p><br /></p>
 <h3 id="globale-methoden">Globale Methoden:</h3>
 <ul>
-<li><h4 id="render_templatetemplate_name-args-data">render_template(template_name, *args, **data)</h4>
+<li><h4>render_template(template_name, *args, **data)</h4>
 <ul>
 <li>Zweck: <br /> Globale Methode, die mit den ggegebenen Daten das Rendern des Templates anstößt.</li>
 <li>Zusammenwirken mit anderen Komponenten: Aufruf in: <strong>discussion</strong>, <strong>index</strong>, <strong>theme</strong>, <strong>users</strong></li>
 </ul></li>
-<li><h4 id="get_aliasname-data">get_alias(name,** **data)</h4>
+<li><h4>get_alias(name,** **data)</h4>
 <ul>
 <li>Zweck: <br /> Globale Methode zum ersetzen der Umlaute und Symbole um Fehler beim Zugriff auf Unterseiten abzufangen.</li>
 <li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>create_article</strong>, <strong>create_discussion</strong>, <strong>create_theme</strong></li>
 </ul></li>
-<li><h4 id="format_time">format_time</h4>
+<li><h4>format_time</h4>
 <ul>
 <li>Zweck: <br /> Formatiert den TimeStamp</li>
 <li>Zusammenwirken mit anderen Komponenten: <br /> Aufruf in: <strong>render_template</strong></li>
+</ul></li>
+</ul>
+<h2 id="api">API</h2>
+<ul>
+<li><code>/login</code>
+<ul>
+<li>required parameters - (<code>user</code>, <code>password</code>)</li>
+</ul></li>
+<li><code>/logout</code></li>
+<li><code>/create_user</code>
+<ul>
+<li>required parameters - (<code>alias</code>, <code>role</code>, <code>name</code>, <code>password</code>)</li>
+</ul></li>
+<li><code>/update_user</code>
+<ul>
+<li>required parameters - (<code>alias</code>, <code>role</code>, <code>name</code>)</li>
+<li>optional parameters - (<code>password</code>)</li>
+</ul></li>
+<li><code>/delete_user</code>
+<ul>
+<li>required parameters - (<code>alias</code>)</li>
+</ul></li>
+<li><code>/create_theme</code>
+<ul>
+<li>required parameters - (<code>name</code>)</li>
+</ul></li>
+<li><code>/create_discussion</code>
+<ul>
+<li>required parameters - (<code>theme</code>, <code>title</code>, <code>article_title</code>, <code>content_title</code>)</li>
+</ul></li>
+<li><code>/update_discussion</code>
+<ul>
+<li>required parameters - (<code>theme</code>, <code>discussion</code>, <code>title</code>)</li>
+</ul></li>
+<li><code>/delete_discussion</code>
+<ul>
+<li>required parameters - (<code>theme</code>, <code>discussion</code>)</li>
+</ul></li>
+<li><code>/create_article</code>
+<ul>
+<li>required parameters - (<code>theme</code>, <code>discussion</code>, <code>title</code>, <code>content</code>)</li>
+</ul></li>
+<li><code>/update_article</code>
+<ul>
+<li>required parameters - (<code>theme</code>, <code>discussion</code>, <code>article</code>, <code>title</code>, <code>content</code>)</li>
+</ul></li>
+<li><code>/delete_article</code>
+<ul>
+<li>required parameters - (<code>theme</code>, <code>discussion</code>, <code>article</code>)</li>
 </ul></li>
 </ul>
 <h2 id="datenablage">Datenablage:</h2>
@@ -371,24 +420,24 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li>Sessions erlaubt, Session-Storage, Session Verzeichnis</li>
 <li>Kodierung: UTF-8</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">{
+<pre class="sourceCode python"><code class="sourceCode python">{
  <span class="st">&#39;/&#39;</span>: {
             <span class="st">&#39;tools.staticdir.root&#39;</span>: current_dir,
-            <span class="co">&#39;tools.staticdir.on&#39;</span>: <span class="va">True</span>,
+            <span class="co">&#39;tools.staticdir.on&#39;</span>: <span class="ot">True</span>,
             <span class="co">&#39;tools.staticdir.dir&#39;</span>: <span class="st">&#39;./content&#39;</span>,
-            <span class="co">&#39;tools.sessions.on&#39;</span>: <span class="va">True</span>,
+            <span class="co">&#39;tools.sessions.on&#39;</span>: <span class="ot">True</span>,
             <span class="co">&#39;tools.sessions.storage_type&#39;</span>: <span class="st">&quot;File&quot;</span>,
             <span class="co">&#39;tools.sessions.storage_path&#39;</span>: <span class="st">&#39;./data/sessions&#39;</span>,
             <span class="co">&#39;tools.sessions.timeout&#39;</span>: <span class="dv">10</span>,
-            <span class="co">&#39;tools.encode.on&#39;</span>: <span class="va">True</span>,
+            <span class="co">&#39;tools.encode.on&#39;</span>: <span class="ot">True</span>,
             <span class="co">&#39;tools.encode.encoding&#39;</span>: <span class="st">&quot;utf-8&quot;</span>
       }
-}</code></pre></div>
+}</code></pre>
 <h2 id="durchführung-und-ergebnis-der-geforderten-prüfungen">Durchführung und Ergebnis der geforderten Prüfungen:</h2>
 <ul>
 <li>Überprüfung des Markups mittels der w3c-Validator-Dienste: <strong>Erfolgreich</strong></li>
 <li>Überprüfung des CSS mittels der w3c-Validator-Dienste: <strong>Erfolgreich</strong></li>
-<li><strong>Projekt lauffähig</strong></li>
+<li>Projekt lauffähig</li>
 </ul>
 </body>
 </html>

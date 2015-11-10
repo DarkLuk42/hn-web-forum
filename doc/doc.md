@@ -328,6 +328,32 @@ Team: Lukas Quast, Frederic Wagner <br />
     + Zusammenwirken mit anderen Komponenten: <br />
         Aufruf in: **render_template**
 
+## API
++ `/login`
+    - required parameters - (`user`, `password`)
++ `/logout`
++ `/create_user`
+    - required parameters - (`alias`, `role`, `name`, `password`)
++ `/update_user`
+    - required parameters - (`alias`, `role`, `name`)
+    - optional parameters - (`password`)
++ `/delete_user`
+    - required parameters - (`alias`)
++ `/create_theme`
+    - required parameters - (`name`)
++ `/create_discussion`
+    - required parameters - (`theme`, `title`, `article_title`, `content_title`)
++ `/update_discussion`
+    - required parameters - (`theme`, `discussion`, `title`)
++ `/delete_discussion`
+    - required parameters - (`theme`, `discussion`)
++ `/create_article`
+    - required parameters - (`theme`, `discussion`, `title`, `content`)
++ `/update_article`
+    - required parameters - (`theme`, `discussion`, `article`, `title`, `content`)
++ `/delete_article`
+    - required parameters - (`theme`, `discussion`, `article`)
+
 ## Datenablage:
 **_In JSON-Datei als Dictionary-Struktur wie folgt:_**
 
