@@ -1,7 +1,8 @@
 # Dokumentation Praktikumsprojekt Forum
-    Dokumentation vom 09.11.2015
-    Praktikumsgruppe: E
-    Team: Lukas Quast, Frederic Wagner
+Dokumentation vom 09.11.2015 \
+Praktikumsgruppe: E \
+Team: Lukas Quast, Frederic Wagner \
+
 
 ## Inhalt:
 - Allgemeine Beschreibung
@@ -12,9 +13,10 @@
 - Durchführung und Ergebnis der geforderten Prüfungen
 
 ## Allgemeine Beschreibung:
-    Das Projekt "Forum" ist eine Client-Server-Anwendung zur Darstellung einzelner Webseiten und Formulare, die per Template-Engine **_mako_** erzeugt werden.
-    Nutzung des Frameworks **_cherrypy_** für den Server. Die Präsentation des Projektes erfolgt per **_CSS_**.
-    Zum Speichern der Daten des Forums (Themen, Diskussionen und Beiträge) und der Konten der Benutzer werden **_JSON_**-Dateien genutzt.
+Das Projekt "Forum" ist eine Client-Server-Anwendung zur Darstellung einzelner Webseiten und Formulare, die per Template-Engine **_mako_** erzeugt werden. \
+Nutzung des Frameworks **_cherrypy_** für den Server. Die Präsentation des Projektes erfolgt per **_CSS_**. \
+Zum Speichern der Daten des Forums (Themen, Diskussionen und Beiträge) und der Konten der Benutzer werden **_JSON_**-Dateien genutzt. \
+
 
 ## Beschreibung der Komponenten:
 - ### Class Repository:
