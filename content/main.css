@@ -164,6 +164,21 @@ button:active
 {
     background-color: rgba(0, 0, 0, 0.75);
 }
+input[type='submit'].btn-delete,
+button.btn-delete
+{
+    background-color: #FF9999;
+}
+input[type='submit'].btn-delete:hover,
+button.btn-delete:hover
+{
+    background-color: #FF7777;
+}
+input[type='submit'].btn-delete:active,
+button.btn-delete:active
+{
+    background-color: #FF3333;
+}
 textarea
 {
     height: 3em;

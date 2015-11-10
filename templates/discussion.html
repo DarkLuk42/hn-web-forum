@@ -19,12 +19,12 @@
             <li>
                 <div class="hidden-form">
                     <button class="show-form btn-edit">bearbeiten</button>
+                    <button class="hide-form">abbrechen</button>
                     <form action="/update_discussion" method="post">
                         <input type="hidden" name="theme" value="${theme['alias']}">
                         <input type="hidden" name="discussion" value="${discussion['alias']}"/>
                         <input type="text" name="title" placeholder="Titel" value="${discussion['title']}" class="required"/>
                         <input type="submit" value="Diskussion bearbeiten"/>
-                        <button class="hide-form">abbrechen</button>
                     </form>
                 </div>
             </li>
@@ -66,6 +66,7 @@
                                     <li>
                                         <div class="hidden-form">
                                             <button class="show-form btn-edit">bearbeiten</button>
+                                            <button class="hide-form">abbrechen</button>
                                             <form action="/update_article" method="post">
                                                 <input type="hidden" name="theme" value="${theme['alias']}">
                                                 <input type="hidden" name="discussion" value="${discussion['alias']}"/>
@@ -73,7 +74,6 @@
                                                 <input type="text" name="title" placeholder="Titel" value="${discussion['articles'][article]['title']}" class="required"/>
                                                 <textarea name="content" placeholder="Inhalt" class="required">${discussion['articles'][article]['content']}</textarea>
                                                 <input type="submit" value="Diskussion bearbeiten"/>
-                                                <button class="hide-form">abbrechen</button>
                                             </form>
                                         </div>
                                     </li>

@@ -90,6 +90,36 @@
   "thema-3": {
     "alias": "thema-3",
     "discussions": {
+      "a": {
+        "alias": "a",
+        "articles": {
+          "a": {
+            "alias": "a",
+            "content": "a",
+            "owner": "admin",
+            "timestamp": 1447147722,
+            "title": "a",
+            "truncated": false
+          }
+        },
+        "title": "a",
+        "truncated": true
+      },
+      "b": {
+        "alias": "b",
+        "articles": {
+          "b": {
+            "alias": "b",
+            "content": "b",
+            "owner": "admin",
+            "timestamp": 1447147792,
+            "title": "b",
+            "truncated": false
+          }
+        },
+        "title": "b",
+        "truncated": true
+      },
       "diskussion-3": {
         "alias": "diskussion-3",
         "articles": {
@@ -119,7 +149,7 @@
           }
         },
         "title": "Diskussion 3",
-        "truncated": false
+        "truncated": true
       }
     },
     "name": "Thema 3"

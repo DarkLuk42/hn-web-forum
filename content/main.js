@@ -33,4 +33,11 @@ $(function(){
             }
         });
     });
+
+    $(".btn-delete").click(function(e){
+        if( !confirm("Wirklich löschen?") )
+        {
+            e.preventDefault()
+        }
+    });
 })

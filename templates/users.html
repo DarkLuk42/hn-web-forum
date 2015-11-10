@@ -13,37 +13,42 @@
                 ${users[user]["name"]}
                 %if userrole == "ADMIN":
                     (Rolle: ${users[user]["role"]})
-                    <form class="inline-form" action="/delete_user" method="post">
-                        <input type="hidden" name="alias" value="${users[user]['alias']}">
-                        <input class="btn-delete" type="submit" value="Benutzer löschen"/>
-                    </form>
-                    <div class="hidden-form">
-                        <button class="show-form btn-edit">bearbeiten</button>
-                        <form action="/update_user" method="post">
-                            <input type="hidden" name="alias" value="${users[user]['alias']}">
-                            <select name="role" class="required">
-                                %if users[user]["role"] == "ADMIN":
-                                    <option value="ADMIN" selected>Administrator</option>
-                                %else:
-                                    <option value="ADMIN">Administrator</option>
-                                %endif
-                                %if users[user]["role"] == "USER":
-                                    <option value="USER" selected>Benutzer</option>
-                                %else:
-                                    <option value="USER">Benutzer</option>
-                                %endif
-                                %if users[user]["role"] == "USER_READONLY":
-                                    <option value="USER_READONLY" selected>Benutzer (nur lesen)</option>
-                                %else:
-                                    <option value="USER_READONLY">Benutzer (nur lesen)</option>
-                                %endif
-                            </select>
-                            <input type="text" name="name" placeholder="Name" class="required" value="${users[user]['name']}"/>
-                            <input type="text" name="password" placeholder="Passwort"/>
-                            <input type="submit" value="Benutzer bearbeiten"/>
-                            <button class="hide-form">abbrechen</button>
-                        </form>
-                    </div>
+                    <ul class="inline">
+                        <li>
+                            <form class="inline-form" action="/delete_user" method="post">
+                                <input type="hidden" name="alias" value="${users[user]['alias']}">
+                                <input class="btn-delete" type="submit" value="Benutzer löschen"/>
+                            </form>
+                        </li><li>
+                            <div class="hidden-form">
+                                <button class="show-form btn-edit">bearbeiten</button>
+                                <button class="hide-form">abbrechen</button>
+                                <form action="/update_user" method="post">
+                                    <input type="hidden" name="alias" value="${users[user]['alias']}">
+                                    <select name="role" class="required">
+                                        %if users[user]["role"] == "ADMIN":
+                                            <option value="ADMIN" selected>Administrator</option>
+                                        %else:
+                                            <option value="ADMIN">Administrator</option>
+                                        %endif
+                                        %if users[user]["role"] == "USER":
+                                            <option value="USER" selected>Benutzer</option>
+                                        %else:
+                                            <option value="USER">Benutzer</option>
+                                        %endif
+                                        %if users[user]["role"] == "USER_READONLY":
+                                            <option value="USER_READONLY" selected>Benutzer (nur lesen)</option>
+                                        %else:
+                                            <option value="USER_READONLY">Benutzer (nur lesen)</option>
+                                        %endif
+                                    </select>
+                                    <input type="text" name="name" placeholder="Name" class="required" value="${users[user]['name']}"/>
+                                    <input type="text" name="password" placeholder="Passwort"/>
+                                    <input type="submit" value="Benutzer bearbeiten"/>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
                 %endif
             </li>
         %endfor
