@@ -16,11 +16,13 @@
             %endif
         %endfor
     </ul>
-    <form action="/create_discussion" method="post">
-        <input type="hidden" name="theme" value="${theme['alias']}">
-        <input type="text" name="title" placeholder="Titel" class="required"/>
-        <input type="text" name="article_title" placeholder="Beitrag" class="required"/>
-        <textarea name="article_content" placeholder="Inhalt" class="required"></textarea>
-        <input type="submit" value="Diskussion starten"/>
-    </form>
+    %if userrole == "USER" or userrole == "ADMIN":
+        <form action="/create_discussion" method="post">
+            <input type="hidden" name="theme" value="${theme['alias']}">
+            <input type="text" name="title" placeholder="Titel" class="required"/>
+            <input type="text" name="article_title" placeholder="Beitrag" class="required"/>
+            <textarea name="article_content" placeholder="Inhalt" class="required"></textarea>
+            <input type="submit" value="Diskussion starten"/>
+        </form>
+    %endif
 </%block>

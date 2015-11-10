@@ -516,12 +516,6 @@ class Application(object):
     logout.exposed = True
 
     @staticmethod
-    def handle_error():
-        error = cherrypy._cperror
-        cherrypy.response.status = 500
-        cherrypy.response.body = error.message #render_template("error")
-
-    @staticmethod
     def error_page_403(status, message, traceback, version):
         return render_template("error", status=status, error_message=message)
 
