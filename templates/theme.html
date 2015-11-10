@@ -11,12 +11,12 @@
         %for discussion in theme["discussions"]:
             %if theme["discussions"][discussion]["truncated"] == False:
                 <li><a href="/${theme['alias']}/${discussion}">${theme["discussions"][discussion]["title"]|h}</a></li>
-            %elif userrole == "ADMIN":
+            %elif user_role == "ADMIN":
                 <li class="truncated"><a href="/${theme['alias']}/${discussion}">${theme["discussions"][discussion]["title"]|h}</a> (gelöscht)</li>
             %endif
         %endfor
     </ul>
-    %if userrole == "USER" or userrole == "ADMIN":
+    %if user_role == "USER" or user_role == "ADMIN":
         <form action="/create_discussion" method="post">
             <input type="hidden" name="theme" value="${theme['alias']}">
             <input type="text" name="title" placeholder="Titel" class="required"/>

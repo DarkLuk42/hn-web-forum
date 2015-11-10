@@ -3,7 +3,7 @@
 
 import os
 import cherrypy
-from app import application
+from app.application import Application
 
 
 def main():
@@ -17,6 +17,7 @@ def main():
     cherrypy.engine.autoreload.unsubscribe()
     cherrypy.engine.timeout_monitor.unsubscribe()
     # Static content config
+    app = Application()
     static_config = {
         '/': {
             'tools.staticdir.root': current_dir,
@@ -28,12 +29,14 @@ def main():
             'tools.sessions.timeout': 10,
             'tools.encode.on': True,
             'tools.encode.encoding': "utf-8",
-            'error_page.403': application.Application.error_page_403,
-            'error_page.404': application.Application.error_page_404
+            'error_page.403': app.error_page_403,
+            'error_page.404': app.error_page_404,
+            'error_page.404': app.error_page_404,
+            'request.error_response': app.handle_error
         }
     }
     # Mount static content handler
-    root_o = cherrypy.tree.mount(application.Application(), '/', static_config)
+    root_o = cherrypy.tree.mount(app, '/', static_config)
     # suppress traceback-info
     cherrypy.config.update({'request.show_tracebacks': False})
     # Start server

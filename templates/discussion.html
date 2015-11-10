@@ -7,7 +7,7 @@
     <p>
         Hier ist die Diskussionen '${discussion['title']|h}' mit allen Beiträgen zu sehen.
     </p>
-    %if userrole == "ADMIN":
+    %if user_role == "ADMIN":
         <ul class="inline">
             <li>
                 <form class="inline-form" action="/delete_discussion" method="post">
@@ -51,7 +51,7 @@
                         %else:
                             <p>${discussion["articles"][article]["content"]|h}</p>
                         %endif
-                        %if userrole == "ADMIN" or (userrole == "USER" and username == discussion["articles"][article]["owner"] and discussion["articles"][article]["alias"] == last_article["alias"]):
+                        %if user_role == "ADMIN" or (user_role == "USER" and username == discussion["articles"][article]["owner"] and discussion["articles"][article]["alias"] == last_article["alias"]):
                             <hr>
                             <div>
                                 <ul class="inline">
@@ -82,7 +82,7 @@
                         %endif
                     </td>
                 </tr>
-            %elif userrole == "ADMIN":
+            %elif user_role == "ADMIN":
                 <tr class="truncated">
                     <td></td>
                     <td><strong>${discussion["articles"][article]["title"]|h}</strong> (gelöscht)</td>
@@ -95,7 +95,7 @@
             %endif
         %endfor
     </table>
-    %if userrole == "USER" or userrole == "ADMIN":
+    %if user_role == "USER" or user_role == "ADMIN":
         <form action="/create_article" method="post">
             <input type="hidden" name="theme" value="${theme['alias']}">
             <input type="hidden" name="discussion" value="${discussion['alias']}">
