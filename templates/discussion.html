@@ -5,7 +5,7 @@
 <%block name="content">
     <h1>${discussion["title"]|h}</h1>
     <p>
-        Hier sind alle Diskussionen aus dem Thema '${theme['name']}' aufgelistet.
+        Hier ist die Diskussionen '${discussion['title']|h}' mit allen Beiträgen zu sehen.
     </p>
     %if userrole == "ADMIN":
         <ul class="inline">

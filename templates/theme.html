@@ -4,6 +4,9 @@
 <%block name="title">${theme["name"]}</%block>
 <%block name="content">
     <h1>${theme["name"]}</h1>
+    <p>
+        Hier sind alle Diskussionen aus dem Thema '${theme['name']}' aufgelistet.
+    </p>
     <ul>
         %for discussion in theme["discussions"]:
             %if theme["discussions"][discussion]["truncated"] == False:
