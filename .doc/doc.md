@@ -392,4 +392,4 @@ Team: Lukas Quast, Frederic Wagner <br />
 ## Durchführung und Ergebnis der geforderten Prüfungen:
 - Überprüfung des Markups mittels der w3c-Validator-Dienste: **Erfolgreich**
 - Überprüfung des CSS mittels der w3c-Validator-Dienste: **Erfolgreich**
-- **Projekt lauffähig**
+- Projekt lauffähig
