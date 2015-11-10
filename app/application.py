@@ -295,7 +295,7 @@ class Application(object):
         obj_theme = self.repository.find_theme(theme)
         obj_discussion = self.repository.find_discussion(theme, discussion)
         if obj_discussion["truncated"]:
-            Application.redirect("/" + theme, u"Die Diskussion wurde gelöscht.")
+            Application.redirect("/" + theme, u"Diese Diskussion existiert nicht mehr.")
         last_article = None
         for key in obj_discussion["articles"]:
             last_article = obj_discussion["articles"][key]
