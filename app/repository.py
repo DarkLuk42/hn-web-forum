@@ -13,11 +13,17 @@ class ThemeNotFound(NotFound):
     def __init__(self, theme):
         self.theme = theme
 
+    def __str__(self):
+        return "Das Thema '%s' wurde nicht gefunden!" % self.theme
+
 
 class DiscussionNotFound(NotFound):
     def __init__(self, theme, discussion):
         self.theme = theme
         self.discussion = discussion
+
+    def __str__(self):
+        return "Die Diskussion '%s' des Themas '%s' wurde nicht gefunden!" % (self.discussion, self.theme)
 
 
 class ArticleNotFound(NotFound):
@@ -26,15 +32,24 @@ class ArticleNotFound(NotFound):
         self.discussion = discussion
         self.article = article
 
+    def __str__(self):
+        return "Der Artikel '%s' aus der Diskussion '%s' des Themas '%s' wurde nicht gefunden!" % (self.article, self.discussion, self.theme)
+
 
 class UserNotFound(NotFound):
     def __init__(self, username):
         self.username = username
 
+    def __str__(self):
+        return "Der Benutzer '%s' wurde nicht gefunden!" % self.username
+
 
 class UsernameAlreadyTaken(Exception):
     def __init__(self, username):
         self.username = username
+
+    def __str__(self):
+        return "Der Benutzername '%s' ist bereits vergeben!" % self.username
 
 
 class Repository:

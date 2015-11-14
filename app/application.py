@@ -20,14 +20,14 @@ class Application(object):
             "user": Application.get_user,
             "username": Application.get_username,
             "user_role": Application.get_user_role,
-            "user_message": Application.get_user_message
+            "user_message": Application.pop_user_message
         })
 
     @staticmethod
     def redirect(path=None, message=None):
         if message is not None:
-            cherrypy.session["message"] = message
-        if path in None:
+            Application.set_user_message(message)
+        if path is None:
             if 'Referer' in cherrypy.request.headerMap:
                 path = cherrypy.request.headerMap['Referer']
             else:
@@ -57,6 +57,18 @@ class Application(object):
         if "user_message" in cherrypy.session:
             return cherrypy.session["user_message"]
         return None
+
+    @staticmethod
+    def pop_user_message():
+        if "user_message" in cherrypy.session:
+            message = cherrypy.session["user_message"]
+            cherrypy.session["user_message"] = None
+            return message
+        return None
+
+    @staticmethod
+    def set_user_message(message):
+        cherrypy.session["user_message"] = message
 
     @staticmethod
     def proof_admin():
@@ -319,16 +331,20 @@ class Application(object):
         return self.template_engine.render("error", status=status, error_message=message)
 
     def handle_error(self):
-        #exception = cherrypy._cperror._exc_info()[1]
-        #message = repr(exception)
+        exception = cherrypy._cperror._exc_info()[1]
+        message = repr(exception)
 
         cherrypy.response.status = 500
-        #if isinstance(exception, NotFound) or isinstance(exception, cherrypy.NotFound):
-        #    cherrypy.response.status = 404
-        #elif isinstance(exception, UsernameAlreadyTaken):
-        #    cherrypy.response.status = 400
+        if isinstance(exception, cherrypy.NotFound):
+            cherrypy.response.status = 404
+        if isinstance(exception, NotFound):
+            cherrypy.response.status = 404
+            message = str(exception)
+        elif isinstance(exception, UsernameAlreadyTaken):
+            cherrypy.response.status = 400
+            message = str(exception)
 
-        cherrypy.response.body = "a"#self.template_engine.render_bytes("error", status=None, error_message=message)
+        cherrypy.response.body = self.template_engine.render_bytes("error", status=None, error_message=message)
 
     def default(self, *arglist, **kwargs):
         arglist = list(filter(None, arglist))

@@ -32,6 +32,6 @@ class TemplateEngine:
         return template.render_unicode(*args, **data)
 
     def render_bytes(self, template_name, *args, **data):
-        return self.render(template_name, *args, **data)
+        return bytes(self.render(template_name, *args, **data), "UTF-8")
 
 # EOF
