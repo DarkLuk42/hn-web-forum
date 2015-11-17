@@ -122,30 +122,36 @@ class Repository:
     def get_themes(self):
         return self.themes
 
-    def find_theme(self, theme):
+    def find_theme(self, theme, throw=True):
         if theme in self.themes:
             return self.themes[theme]
         raise ThemeNotFound(theme)
 
-    def find_discussion(self, theme, discussion):
-        obj_theme = self.find_theme(theme)
-        if discussion in obj_theme["discussions"]:
+    def find_discussion(self, theme, discussion, throw=True):
+        obj_theme = self.find_theme(theme, throw=throw)
+        if obj_theme is not None and discussion in obj_theme["discussions"]:
             return obj_theme["discussions"][discussion]
-        raise DiscussionNotFound(theme, discussion)
+        if throw:
+            raise DiscussionNotFound(theme, discussion)
+        return None
 
-    def find_article(self, theme, discussion, article):
-        obj_discussion = self.find_discussion(theme, discussion)
-        if article in obj_discussion["articles"]:
+    def find_article(self, theme, discussion, article, throw=True):
+        obj_discussion = self.find_discussion(theme, discussion, throw=throw)
+        if obj_discussion is not None and article in obj_discussion["articles"]:
             return obj_discussion["articles"][article]
-        raise ArticleNotFound(theme, discussion, article)
+        if throw:
+            raise ArticleNotFound(theme, discussion, article)
+        return None
 
     def get_users(self):
         return self.users
 
-    def find_user(self, user):
+    def find_user(self, user, throw=True):
         if user in self.users:
             return self.users[user]
-        raise UserNotFound(user)
+        if throw:
+            raise UserNotFound(user)
+        return None;
 
     def create_theme(self, name):
         alias = Repository.get_alias(name, **self.themes)

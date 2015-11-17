@@ -17,13 +17,13 @@ class Validator(object):
                     self.is_in(field, rules[field][1])
 
     def not_empty(self, field):
-        if field in self.data or not self.data[field]:
+        if field not in self.data or not self.data[field]:
             self.errors[field] = Validator.EMPTY
             return False
         return True
 
     def is_in(self, field, possibilities):
-        if field in self.data or not self.data[field] or self.data[field] not in possibilities:
+        if field not in self.data or not self.data[field] or self.data[field] not in possibilities:
             self.errors[field] = Validator.INVALID_VALUE
             return False
         return True

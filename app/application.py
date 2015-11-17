@@ -4,6 +4,7 @@ import cherrypy
 from .repository import Repository, NotFound, UsernameAlreadyTaken
 from .template import TemplateEngine
 from .validator import Validator
+import json
 
 
 try:
@@ -72,13 +73,13 @@ class Application(object):
 
     @staticmethod
     def proof_admin():
-        if Application.get_userrole() != "ADMIN":
+        if Application.get_user_role() != "ADMIN":
             msg_s = "Du bist kein Admin!"
             raise cherrypy.HTTPError(403, msg_s)
 
     @staticmethod
     def proof_user():
-        if Application.get_userrole() != "ADMIN" and Application.get_userrole() != "USER":
+        if Application.get_user_role() != "ADMIN" and Application.get_user_role() != "USER":
             msg_s = "Du hast keine Schreibrechte!"
             raise cherrypy.HTTPError(403, msg_s)
 
@@ -112,14 +113,23 @@ class Application(object):
             "password": (Validator.EMPTY,)
         })
         if v.is_valid():
-            try:
-                user = self.repository.find_user(kwargs["user"])
+            user = self.repository.find_user(kwargs["user"], throw=False)
+
+            if user is not None and user["password"] == kwargs["password"]:
                 cherrypy.session["user"] = user
-                Application.redirect(message="Du hast dich erfolgreich eingeloggt!")
-            except:
-                pass
-        Application.redirect("/", "Der login ist fehlgeschlagen!")
+                return self.response(success=False, message="Du hast dich erfolgreich eingeloggt!")
+        return self.response(success=False, message="Der login ist fehlgeschlagen!")
     login.exposed = True
+
+    def response(self, success=False, path=None, message="", data=None):
+        if self.is_ajax():
+            return json.dumps({
+                "success": success,
+                "message": message,
+                "data": data
+            })
+        Application.redirect(path, message)
+
 
     def create_theme(self, **kwargs):
         Application.proof_admin()
@@ -128,7 +138,8 @@ class Application(object):
         })
         if v.is_valid():
             self.repository.create_theme(name=kwargs["name"])
-        Application.redirect(message=v.get_error_message())
+            return self.response(True, message="Das Thema wurde erfolgreich angelegt.")
+        return self.response(False, message=v.get_error_message())
     create_theme.exposed = True
 
     def create_discussion(self, **kwargs):
@@ -146,8 +157,8 @@ class Application(object):
                 article_title=kwargs["article_title"],
                 article_content=kwargs["article_content"],
                 owner=Application.get_username())
-            Application.redirect(message="Die Disskussion wurde erfolgreich gestartet!")
-        Application.redirect(message=v.get_error_message())
+            return self.response(True, message="Die Disskussion wurde erfolgreich gestartet!")
+        return self.response(False, message=v.get_error_message())
     create_discussion.exposed = True
 
     def create_article(self, **kwargs):
@@ -165,8 +176,8 @@ class Application(object):
                 title=kwargs["title"],
                 content=kwargs["content"],
                 owner=Application.get_username())
-            Application.redirect(message="Der Beitrag wurde erfolgreich gelöscht!")
-        Application.redirect(message=v.get_error_message())
+            return self.response(True, message="Der Beitrag wurde erfolgreich gelöscht!")
+        return self.response(False, message=v.get_error_message())
     create_article.exposed = True
 
     def delete_discussion(self, **kwargs):
@@ -179,8 +190,8 @@ class Application(object):
             self.repository.delete_discussion(
                 theme=kwargs["theme"],
                 discussion=kwargs["discussion"])
-            Application.redirect(message="Die Diskussion wurde erfolgreich gelöscht!")
-        Application.redirect(message=v.get_error_message())
+            return self.response(True, message="Die Diskussion wurde erfolgreich gelöscht!")
+        return self.response(False, message=v.get_error_message())
     delete_discussion.exposed = True
 
     def delete_article(self, **kwargs):
@@ -198,13 +209,13 @@ class Application(object):
                 theme=kwargs["theme"],
                 discussion=kwargs["discussion"],
                 article=kwargs["article"])
-            if Application.get_userrole() != "ADMIN" and article["owner"] != Application.get_username():
+            if Application.get_user_role() != "ADMIN" and article["owner"] != Application.get_username():
                 msg_s = "Du bist nicht der Besizer!"
                 raise cherrypy.HTTPError(403, msg_s)
             last_article = None
             for key in discussion["articles"]:
                 last_article = key
-            if Application.get_userrole() != "ADMIN" and last_article != article["alias"]:
+            if Application.get_user_role() != "ADMIN" and last_article != article["alias"]:
                 msg_s = "Du kannst nur den letzten Beitrag bearbeiten!"
                 raise cherrypy.HTTPError(403, msg_s)
 
@@ -212,8 +223,8 @@ class Application(object):
                 theme=kwargs["theme"],
                 discussion=kwargs["discussion"],
                 article=kwargs["article"])
-            Application.redirect(message="Der Beitrag wurde erfolgreich gelöscht!")
-        Application.redirect(message=v.get_error_message())
+            return self.response(True, message="Der Beitrag wurde erfolgreich gelöscht!")
+        return self.response(False, message=v.get_error_message())
     delete_article.exposed = True
 
     def update_discussion(self, **kwargs):
@@ -228,8 +239,8 @@ class Application(object):
                 theme=kwargs["theme"],
                 discussion=kwargs["discussion"],
                 title=kwargs["title"])
-            Application.redirect(message="Die Diskussion wurde erfolgreich gelöscht!")
-        Application.redirect(message=v.get_error_message())
+            return self.response(True, message="Die Diskussion wurde erfolgreich gelöscht!")
+        return self.response(False, message=v.get_error_message())
     update_discussion.exposed = True
 
     def update_article(self, **kwargs):
@@ -249,13 +260,13 @@ class Application(object):
                 theme=kwargs["theme"],
                 discussion=kwargs["discussion"],
                 article=kwargs["article"])
-            if Application.get_userrole() != "ADMIN" and article["owner"] != Application.get_username():
+            if Application.get_user_role() != "ADMIN" and article["owner"] != Application.get_username():
                 msg_s = "Du bist nicht der Besizer!"
                 raise cherrypy.HTTPError(403, msg_s)
             last_article = None
             for key in discussion["articles"]:
                 last_article = key
-            if Application.get_userrole() != "ADMIN" and last_article != article["alias"]:
+            if Application.get_user_role() != "ADMIN" and last_article != article["alias"]:
                 msg_s = "Du kannst nur den letzten Beitrag bearbeiten!"
                 raise cherrypy.HTTPError(403, msg_s)
 
@@ -265,8 +276,8 @@ class Application(object):
                 article=kwargs["article"],
                 title=kwargs["title"],
                 content=kwargs["content"])
-            Application.redirect(message="Der Beitrag wurde erfolgreich gelöscht!")
-        Application.redirect(message=v.get_error_message())
+            return self.response(True, message="Der Beitrag wurde erfolgreich gelöscht!")
+        return self.response(False, message=v.get_error_message())
     update_article.exposed = True
 
     def create_user(self, **kwargs):
@@ -283,8 +294,8 @@ class Application(object):
                 role=kwargs["role"],
                 name=kwargs["name"],
                 password=kwargs["password"])
-            Application.redirect(message="Der Benutzer wurde erfolgreich angelegt!")
-        Application.redirect(message=v.get_error_message())
+            return self.response(True, message="Der Benutzer wurde erfolgreich angelegt!")
+        return self.response(False, message=v.get_error_message())
     create_user.exposed = True
 
     def update_user(self, **kwargs):
@@ -306,8 +317,8 @@ class Application(object):
                     alias=kwargs["alias"],
                     role=kwargs["role"],
                     name=kwargs["name"])
-            Application.redirect(message="Der Benutzer wurde erfolgreich bearbeitet!")
-        Application.redirect(message=v.get_error_message())
+            return self.response(True, message="Der Benutzer wurde erfolgreich bearbeitet!")
+        return self.response(False, message=v.get_error_message())
     update_user.exposed = True
 
     def delete_user(self, **kwargs):
@@ -315,19 +326,38 @@ class Application(object):
         if "alias" in kwargs and kwargs["alias"] and kwargs["alias"] == Repository.is_alias(kwargs["alias"]):
             self.repository.delete_user(
                 alias=kwargs["alias"])
-            Application.redirect("/users", "Der Benutzer wurde erfolgreich gelöscht!")
-        Application.redirect("/users", "Ein Benutzername ist erforderlich.")
+            return self.response(True, "/users", "Der Benutzer wurde erfolgreich gelöscht!")
+        return self.response(False, "/users", "Ein Benutzername ist erforderlich.")
     delete_user.exposed = True
+
+    def is_ajax(self):
+        if "X-REQUESTED-WITH" in cherrypy.request.headers:
+            return cherrypy.request.headers["X-REQUESTED-WITH"].lower() == "XMLHttpRequest".lower()
+        return False
 
     def logout(self):
         cherrypy.session["user"] = None
-        Application.redirect("/", "Du hast dich erfolgreich ausgeloggt!")
+        if self.is_ajax():
+            return json.dumps({
+                "success": True
+            })
+        return self.response(success=True, path="/", message="Du hast dich erfolgreich ausgeloggt!")
     logout.exposed = True
 
     def error_page_403(self, status, message, traceback, version):
+        if self.is_ajax():
+            return json.dumps({
+                "success": False,
+                "message": message
+            })
         return self.template_engine.render("error", status=status, error_message=message)
 
     def error_page_404(self, status, message, traceback, version):
+        if self.is_ajax():
+            return json.dumps({
+                "success": False,
+                "message": message
+            })
         return self.template_engine.render("error", status=status, error_message=message)
 
     def handle_error(self):
@@ -344,7 +374,13 @@ class Application(object):
             cherrypy.response.status = 400
             message = str(exception)
 
-        cherrypy.response.body = self.template_engine.render_bytes("error", status=None, error_message=message)
+        if self.is_ajax():
+            cherrypy.response.body = bytes(json.dumps({
+                "success": False,
+                "message": message
+            }), "UTF-8")
+        else:
+            cherrypy.response.body = self.template_engine.render_bytes("error", status=None, error_message=message)
 
     def default(self, *arglist, **kwargs):
         arglist = list(filter(None, arglist))
