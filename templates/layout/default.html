@@ -34,8 +34,8 @@
             <%include file="/partials/breadcrumb.html"/>
         </header>
         <div class="content">
-            %if message != None:
-                <p class="message">${message}</p>
+            %if user_message != None:
+                <p class="message">${user_message}</p>
             %endif
 
             <%block name="content"/>

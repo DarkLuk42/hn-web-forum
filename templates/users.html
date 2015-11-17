@@ -11,7 +11,7 @@
         %for user in users:
             <li>
                 ${users[user]["name"]}
-                %if userrole == "ADMIN":
+                %if user_role == "ADMIN":
                     (Rolle: ${users[user]["role"]})
                     <ul class="inline">
                         <li>
@@ -53,7 +53,7 @@
             </li>
         %endfor
     </ul>
-    %if userrole == "ADMIN":
+    %if user_role == "ADMIN":
         <form action="/create_user" method="post">
             <input type="text" name="alias" placeholder="Benutzername" class="required"/>
             <select name="role" class="required">
