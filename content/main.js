@@ -15,6 +15,10 @@ function showError(message){
     //window.location.href = "#" + id;*/
 };
 
+function updateDiscussion( data ){
+    $(".discussion-title").text(data.title);
+};
+
 function createArticle( data ){
     $("tr[id^='article'").parent().append( data.html );
     registerHandlers("#article-" + data.article.alias);
@@ -94,11 +98,11 @@ function registerHandlers(element)
                 if( data.success )
                 {
                     var fn = snakeToCamel($this.attr("action").substring(1));
-                    showMessage(data.message);
                     if( fn && window.hasOwnProperty(fn) )
                     {
                         window[fn](data.data);
                     }
+                    showMessage(data.message);
                 }
                 else
                 {

@@ -146,7 +146,7 @@ class Application(object):
             data = {
                 "theme": theme
             }
-            return self.response(True, message="Das Thema wurde erfolgreich angelegt.", data=data)
+            return self.response(True, path="/" + theme["alias"], message="Das Thema wurde erfolgreich angelegt.", data=data)
         return self.response(False, message=v.get_error_message())
     create_theme.exposed = True
 
@@ -165,11 +165,12 @@ class Application(object):
                 article_title=kwargs["article_title"],
                 article_content=kwargs["article_content"],
                 owner=Application.get_username())
+            theme = self.repository.find_theme(kwargs["theme"])
             data = {
-                "theme": self.repository.find_theme(kwargs["theme"]),
+                "theme": theme,
                 "discussion": discussion
             }
-            return self.response(True, message="Die Disskussion wurde erfolgreich gestartet!", data=data)
+            return self.response(True, path="/" + theme["alias"] + "/" + discussion["alias"], message="Die Disskussion wurde erfolgreich gestartet!", data=data)
         return self.response(False, message=v.get_error_message())
     create_discussion.exposed = True
 
@@ -265,7 +266,7 @@ class Application(object):
                 theme=kwargs["theme"],
                 discussion=kwargs["discussion"],
                 title=kwargs["title"])
-            return self.response(True, message="Die Diskussion wurde erfolgreich gelöscht!", data=data)
+            return self.response(True, message="Die Diskussion wurde erfolgreich bearbeitet!", data=data)
         return self.response(False, message=v.get_error_message())
     update_discussion.exposed = True
 

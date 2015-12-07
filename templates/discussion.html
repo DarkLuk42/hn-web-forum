@@ -3,9 +3,9 @@
 
 <%block name="title">${discussion["title"]|h}</%block>
 <%block name="content">
-    <h1>${discussion["title"]|h}</h1>
+    <h1 class="discussion-title">${discussion["title"]|h}</h1>
     <p>
-        Hier ist die Diskussionen '${discussion['title']|h}' mit allen Beiträgen zu sehen.
+        Hier ist die Diskussionen '<span class="discussion-title">${discussion['title']|h}</span>' mit allen Beiträgen zu sehen.
     </p>
     %if user_role == "ADMIN":
         <ul class="inline">
