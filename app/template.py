@@ -5,9 +5,11 @@ strict_undefined = True
 
 
 class TemplateEngine:
-    def __init__(self, folder, global_fields):
+    def __init__(self, folder, global_fields, global_functions):
         self.folder = folder
         self.global_fields = global_fields
+        global_functions["format_time"] = TemplateEngine.format_time
+        self.global_functions = global_functions
 
     @staticmethod
     def format_time(timestamp, format):
@@ -28,7 +30,9 @@ class TemplateEngine:
             else:
                 data[field] = self.global_fields[field]
 
-        data["format_time"] = TemplateEngine.format_time
+        for function in self.global_functions:
+            data[function] = self.global_functions[function]
+
         return template.render_unicode(*args, **data)
 
     def render_bytes(self, template_name, *args, **data):

@@ -162,6 +162,7 @@ class Repository:
         }
         self.sort_themes()
         self.save_themes()
+        return self.themes[alias]
 
     def create_discussion(self, theme, title, article_title, article_content, owner):
         theme = self.find_theme(theme)
@@ -184,6 +185,7 @@ class Repository:
         }
         self.sort_themes()
         self.save_themes()
+        return theme["discussions"][alias]
 
     def create_article(self, theme, discussion, title, content, owner):
         discussion = self.find_discussion(theme, discussion)
@@ -198,24 +200,28 @@ class Repository:
         }
         self.sort_themes()
         self.save_themes()
+        return discussion["articles"][alias]
 
     def delete_discussion(self, theme, discussion):
         discussion = self.find_discussion(theme, discussion)
         discussion["truncated"] = True
         self.sort_themes()
         self.save_themes()
+        return discussion
 
     def delete_article(self, theme, discussion, article):
         article = self.find_article(theme, discussion, article)
         article["truncated"] = True
         self.sort_themes()
         self.save_themes()
+        return article
 
     def update_discussion(self, theme, discussion, title):
         discussion = self.find_discussion(theme, discussion)
         discussion["title"] = title
         self.sort_themes()
         self.save_themes()
+        return discussion
 
     def update_article(self, theme, discussion, article, title, content):
         article = self.find_article(theme, discussion, article)
@@ -223,6 +229,7 @@ class Repository:
         article["content"] = content
         self.sort_themes()
         self.save_themes()
+        return article
 
     def create_user(self, alias, role, name, password):
         if alias in self.users:
@@ -234,6 +241,7 @@ class Repository:
             "password": password
         }
         self.save_users()
+        return self.users[alias]
 
     def update_user(self, alias, role, name, password=None):
         user = self.find_user(alias)
@@ -242,11 +250,13 @@ class Repository:
         if password is not None and password != "":
             user["password"] = password
         self.save_users()
+        return user
 
     def delete_user(self, alias):
         user = self.find_user(alias)
         del self.users[alias]
         self.save_users()
+        return user
 
     def save_themes(self):
         with open("data/themes.json", "w") as themes_file:

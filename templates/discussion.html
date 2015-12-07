@@ -20,7 +20,7 @@
                 <div class="hidden-form">
                     <button class="show-form btn-edit">bearbeiten</button>
                     <button class="hide-form">abbrechen</button>
-                    <form action="/update_discussion" method="post">
+                    <form class="ajax" action="/update_discussion" method="post">
                         <input type="hidden" name="theme" value="${theme['alias']}">
                         <input type="hidden" name="discussion" value="${discussion['alias']}"/>
                         <input type="text" name="title" placeholder="Titel" value="${discussion['title']}" class="required"/>
@@ -33,7 +33,7 @@
     <table>
         %for article in discussion["articles"]:
             %if discussion["articles"][article]["truncated"] == False:
-                <tr>
+                <tr id='article-${discussion["articles"][article]["alias"]}'>
                     <td>
                         <dl>
                             <dt>Author</dt>
@@ -56,7 +56,7 @@
                             <div>
                                 <ul class="inline">
                                     <li>
-                                        <form class="inline-form" action="/delete_article" method="post">
+                                        <form class="ajax inline-form" action="/delete_article" method="post">
                                             <input type="hidden" name="theme" value="${theme['alias']}">
                                             <input type="hidden" name="discussion" value="${discussion['alias']}"/>
                                             <input type="hidden" name="article" value="${article}"/>
@@ -67,7 +67,7 @@
                                         <div class="hidden-form">
                                             <button class="show-form btn-edit">bearbeiten</button>
                                             <button class="hide-form">abbrechen</button>
-                                            <form action="/update_article" method="post">
+                                            <form class="ajax" action="/update_article" method="post">
                                                 <input type="hidden" name="theme" value="${theme['alias']}">
                                                 <input type="hidden" name="discussion" value="${discussion['alias']}"/>
                                                 <input type="hidden" name="article" value="${article}"/>
@@ -83,12 +83,12 @@
                     </td>
                 </tr>
             %elif user_role == "ADMIN":
-                <tr class="truncated">
+                <tr id='article-${discussion["articles"][article]["alias"]}' class="truncated">
                     <td></td>
                     <td><strong>${discussion["articles"][article]["title"]|h}</strong> (gelöscht)</td>
                 </tr>
             %else:
-                <tr class="truncated">
+                <tr id='article-${discussion["articles"][article]["alias"]}' class="truncated">
                     <td></td>
                     <td>Dieser Beitrag wurde gelöscht.</td>
                 </tr>
@@ -96,7 +96,7 @@
         %endfor
     </table>
     %if user_role == "USER" or user_role == "ADMIN":
-        <form action="/create_article" method="post">
+        <form class="ajax" action="/create_article" method="post">
             <input type="hidden" name="theme" value="${theme['alias']}">
             <input type="hidden" name="discussion" value="${discussion['alias']}">
             <input type="text" name="title" placeholder="Titel" class="required"/>

@@ -1,0 +1,62 @@
+# coding: utf-8
+%if article["truncated"] == False:
+    <tr id='article-${article["alias"]}'>
+        <td>
+            <dl>
+                <dt>Author</dt>
+                <dd>${article["owner"]}</dd>
+                <dt>Datum</dt>
+                <dd>${format_time(article["timestamp"], "%d.%m.%Y")}</dd>
+                <dt>Uhrzeit</dt>
+                <dd>${format_time(article["timestamp"], "%H:%M Uhr")}</dd>
+            </dl>
+        </td>
+        <td>
+            <strong>${article["title"]|h}</strong>
+            %if article["content"][:1] == "~":
+                <pre>${article["content"][1:]|h}</pre>
+            %else:
+                <p>${article["content"]|h}</p>
+            %endif
+            %if user_role == "ADMIN" or (user_role == "USER" and username == article["owner"] and article["alias"] == last_article["alias"] ):
+                <hr>
+                <div>
+                    <ul class="inline">
+                        <li>
+                            <form class="ajax inline-form" action="/delete_article" method="post">
+                                <input type="hidden" name="theme" value="${theme['alias']}">
+                                <input type="hidden" name="discussion" value="${discussion['alias']}"/>
+                                <input type="hidden" name="article" value="${article['alias']}"/>
+                                <input class="btn-delete" type="submit" value="Beitrag löschen"/>
+                            </form>
+                        </li>
+                        <li>
+                            <div class="hidden-form">
+                                <button class="show-form btn-edit">bearbeiten</button>
+                                <button class="hide-form">abbrechen</button>
+                                <form class="ajax" action="/update_article" method="post">
+                                    <input type="hidden" name="theme" value="${theme['alias']}">
+                                    <input type="hidden" name="discussion" value="${discussion['alias']}"/>
+                                    <input type="hidden" name="article" value="${article['alias']}"/>
+                                    <input type="text" name="title" placeholder="Titel" value="${article['title']}" class="required"/>
+                                    <textarea name="content" placeholder="Inhalt" class="required">${article['content']}</textarea>
+                                    <input type="submit" value="Diskussion bearbeiten"/>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            %endif
+        </td>
+    </tr>
+%elif user_role == "ADMIN":
+    <tr id='article-${article["alias"]}' class="truncated">
+        <td></td>
+        <td><strong>${article["title"]|h}</strong> (gelöscht)</td>
+    </tr>
+%else:
+    <tr id='article-${article["alias"]}' class="truncated">
+        <td></td>
+        <td>Dieser Beitrag wurde gelöscht.</td>
+    </tr>
+%endif

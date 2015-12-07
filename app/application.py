@@ -22,6 +22,8 @@ class Application(object):
             "username": Application.get_username,
             "user_role": Application.get_user_role,
             "user_message": Application.pop_user_message
+        }, global_functions={
+            "json_dumps": json.dumps
         })
 
     @staticmethod
@@ -29,8 +31,8 @@ class Application(object):
         if message is not None:
             Application.set_user_message(message)
         if path is None:
-            if 'Referer' in cherrypy.request.headerMap:
-                path = cherrypy.request.headerMap['Referer']
+            if 'Referer' in cherrypy.request.headers:
+                path = cherrypy.request.headers['Referer']
             else:
                 path = "/"
         raise cherrypy.HTTPRedirect(path)
@@ -117,12 +119,15 @@ class Application(object):
 
             if user is not None and user["password"] == kwargs["password"]:
                 cherrypy.session["user"] = user
-                return self.response(success=False, message="Du hast dich erfolgreich eingeloggt!")
+                return self.response(success=False, message="Du hast dich erfolgreich eingeloggt!", data={"user": user})
         return self.response(success=False, message="Der login ist fehlgeschlagen!")
     login.exposed = True
 
     def response(self, success=False, path=None, message="", data=None):
         if self.is_ajax():
+            if "render_template" in data:
+                data["html"] = self.template_engine.render(data["render_template"], **data)
+                del data["render_template"]
             return json.dumps({
                 "success": success,
                 "message": message,
@@ -137,8 +142,11 @@ class Application(object):
             "name": (Validator.EMPTY,)
         })
         if v.is_valid():
-            self.repository.create_theme(name=kwargs["name"])
-            return self.response(True, message="Das Thema wurde erfolgreich angelegt.")
+            theme = self.repository.create_theme(name=kwargs["name"])
+            data = {
+                "theme": theme
+            }
+            return self.response(True, message="Das Thema wurde erfolgreich angelegt.", data=data)
         return self.response(False, message=v.get_error_message())
     create_theme.exposed = True
 
@@ -151,13 +159,17 @@ class Application(object):
             "article_content": (Validator.EMPTY,)
         })
         if v.is_valid():
-            self.repository.create_discussion(
+            discussion = self.repository.create_discussion(
                 theme=kwargs["theme"],
                 title=kwargs["title"],
                 article_title=kwargs["article_title"],
                 article_content=kwargs["article_content"],
                 owner=Application.get_username())
-            return self.response(True, message="Die Disskussion wurde erfolgreich gestartet!")
+            data = {
+                "theme": self.repository.find_theme(kwargs["theme"]),
+                "discussion": discussion
+            }
+            return self.response(True, message="Die Disskussion wurde erfolgreich gestartet!", data=data)
         return self.response(False, message=v.get_error_message())
     create_discussion.exposed = True
 
@@ -170,13 +182,20 @@ class Application(object):
             "content": (Validator.EMPTY,)
         })
         if v.is_valid():
-            self.repository.create_article(
+            article = self.repository.create_article(
                 theme=kwargs["theme"],
                 discussion=kwargs["discussion"],
                 title=kwargs["title"],
                 content=kwargs["content"],
                 owner=Application.get_username())
-            return self.response(True, message="Der Beitrag wurde erfolgreich gelöscht!")
+            data = {
+                "render_template": "partials/article",
+                "theme": self.repository.find_theme(kwargs["theme"]),
+                "discussion": self.repository.find_discussion(kwargs["theme"], kwargs["discussion"]),
+                "article": article,
+                "last_article": article
+            }
+            return self.response(True, message="Der Beitrag wurde erfolgreich geposted!", data=data)
         return self.response(False, message=v.get_error_message())
     create_article.exposed = True
 
@@ -187,10 +206,10 @@ class Application(object):
             "discussion": (Validator.EMPTY,)
         })
         if v.is_valid():
-            self.repository.delete_discussion(
+            data = self.repository.delete_discussion(
                 theme=kwargs["theme"],
                 discussion=kwargs["discussion"])
-            return self.response(True, message="Die Diskussion wurde erfolgreich gelöscht!")
+            return self.response(True, message="Die Diskussion wurde erfolgreich gelöscht!", data=data)
         return self.response(False, message=v.get_error_message())
     delete_discussion.exposed = True
 
@@ -219,11 +238,18 @@ class Application(object):
                 msg_s = "Du kannst nur den letzten Beitrag bearbeiten!"
                 raise cherrypy.HTTPError(403, msg_s)
 
-            self.repository.delete_article(
+            article = self.repository.delete_article(
                 theme=kwargs["theme"],
                 discussion=kwargs["discussion"],
                 article=kwargs["article"])
-            return self.response(True, message="Der Beitrag wurde erfolgreich gelöscht!")
+            data = {
+                "render_template": "partials/article",
+                "theme": self.repository.find_theme(kwargs["theme"]),
+                "discussion": self.repository.find_discussion(kwargs["theme"], kwargs["discussion"]),
+                "article": article,
+                "last_article": article
+            }
+            return self.response(True, message="Der Beitrag wurde erfolgreich gelöscht!", data=data)
         return self.response(False, message=v.get_error_message())
     delete_article.exposed = True
 
@@ -235,11 +261,11 @@ class Application(object):
             "title": (Validator.EMPTY,)
         })
         if v.is_valid():
-            self.repository.update_discussion(
+            data = self.repository.update_discussion(
                 theme=kwargs["theme"],
                 discussion=kwargs["discussion"],
                 title=kwargs["title"])
-            return self.response(True, message="Die Diskussion wurde erfolgreich gelöscht!")
+            return self.response(True, message="Die Diskussion wurde erfolgreich gelöscht!", data=data)
         return self.response(False, message=v.get_error_message())
     update_discussion.exposed = True
 
@@ -270,13 +296,20 @@ class Application(object):
                 msg_s = "Du kannst nur den letzten Beitrag bearbeiten!"
                 raise cherrypy.HTTPError(403, msg_s)
 
-            self.repository.update_article(
+            article = self.repository.update_article(
                 theme=kwargs["theme"],
                 discussion=kwargs["discussion"],
                 article=kwargs["article"],
                 title=kwargs["title"],
                 content=kwargs["content"])
-            return self.response(True, message="Der Beitrag wurde erfolgreich gelöscht!")
+            data = {
+                "render_template": "partials/article",
+                "theme": self.repository.find_theme(kwargs["theme"]),
+                "discussion": self.repository.find_discussion(kwargs["theme"], kwargs["discussion"]),
+                "article": article,
+                "last_article": last_article
+            }
+            return self.response(True, message="Der Beitrag wurde erfolgreich bearbeitet!", data=data)
         return self.response(False, message=v.get_error_message())
     update_article.exposed = True
 
@@ -289,12 +322,12 @@ class Application(object):
             "password": (Validator.EMPTY,)
         })
         if v.is_valid():
-            self.repository.create_user(
+            data = self.repository.create_user(
                 alias=kwargs["alias"],
                 role=kwargs["role"],
                 name=kwargs["name"],
                 password=kwargs["password"])
-            return self.response(True, message="Der Benutzer wurde erfolgreich angelegt!")
+            return self.response(True, message="Der Benutzer wurde erfolgreich angelegt!", data=data)
         return self.response(False, message=v.get_error_message())
     create_user.exposed = True
 
@@ -307,26 +340,26 @@ class Application(object):
         })
         if v.is_valid():
             if "password" in kwargs and kwargs["password"]:
-                self.repository.update_user(
+                data = self.repository.update_user(
                     alias=kwargs["alias"],
                     role=kwargs["role"],
                     name=kwargs["name"],
                     password=kwargs["password"])
             else:
-                self.repository.update_user(
+                data = self.repository.update_user(
                     alias=kwargs["alias"],
                     role=kwargs["role"],
                     name=kwargs["name"])
-            return self.response(True, message="Der Benutzer wurde erfolgreich bearbeitet!")
+            return self.response(True, message="Der Benutzer wurde erfolgreich bearbeitet!", data=data)
         return self.response(False, message=v.get_error_message())
     update_user.exposed = True
 
     def delete_user(self, **kwargs):
         Application.proof_admin()
         if "alias" in kwargs and kwargs["alias"] and kwargs["alias"] == Repository.is_alias(kwargs["alias"]):
-            self.repository.delete_user(
+            data = self.repository.delete_user(
                 alias=kwargs["alias"])
-            return self.response(True, "/users", "Der Benutzer wurde erfolgreich gelöscht!")
+            return self.response(True, "/users", "Der Benutzer wurde erfolgreich gelöscht!", data=data)
         return self.response(False, "/users", "Ein Benutzername ist erforderlich.")
     delete_user.exposed = True
 
