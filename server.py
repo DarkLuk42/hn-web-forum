@@ -31,7 +31,6 @@ def main():
             'tools.encode.encoding': "utf-8",
             'error_page.403': app.error_page_403,
             'error_page.404': app.error_page_404,
-            'error_page.404': app.error_page_404,
             'request.error_response': app.handle_error
         }
     }
