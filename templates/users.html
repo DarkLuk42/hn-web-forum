@@ -9,13 +9,13 @@
     </p>
     <ul>
         %for user in users:
-            <li>
-                ${users[user]["name"]}
+            <li id="user-${users[user]['alias']}">
+                <span class="user-name">${users[user]["name"]}</span>
                 %if user_role == "ADMIN":
-                    (Rolle: ${users[user]["role"]})
+                    (Rolle: <span class="user-role">${users[user]["role"]}</span>)
                     <ul class="inline">
                         <li>
-                            <form class="inline-form" action="/delete_user" method="post">
+                            <form class="ajax inline-form" action="/delete_user" method="post">
                                 <input type="hidden" name="alias" value="${users[user]['alias']}">
                                 <input class="btn-delete" type="submit" value="Benutzer löschen"/>
                             </form>
@@ -23,7 +23,7 @@
                             <div class="hidden-form">
                                 <button class="show-form btn-edit">bearbeiten</button>
                                 <button class="hide-form">abbrechen</button>
-                                <form action="/update_user" method="post">
+                                <form class="ajax" action="/update_user" method="post">
                                     <input type="hidden" name="alias" value="${users[user]['alias']}">
                                     <select name="role" class="required">
                                         %if users[user]["role"] == "ADMIN":
@@ -54,7 +54,7 @@
         %endfor
     </ul>
     %if user_role == "ADMIN":
-        <form action="/create_user" method="post">
+        <form class="ajax" action="/create_user" method="post">
             <input type="text" name="alias" placeholder="Benutzername" class="required"/>
             <select name="role" class="required">
                 <option value="ADMIN">Administrator</option>

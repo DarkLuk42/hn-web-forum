@@ -17,7 +17,7 @@
         %endfor
     </ul>
     %if user_role == "USER" or user_role == "ADMIN":
-        <form action="/create_discussion" method="post">
+        <form class="ajax" action="/create_discussion" method="post">
             <input type="hidden" name="theme" value="${theme['alias']}">
             <input type="text" name="title" placeholder="Titel" class="required"/>
             <input type="text" name="article_title" placeholder="Beitrag" class="required"/>

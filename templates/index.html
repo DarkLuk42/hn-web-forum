@@ -13,7 +13,7 @@
         %endfor
     </ul>
     %if user_role == "ADMIN":
-        <form action="/create_theme" method="post">
+        <form class="ajax" action="/create_theme" method="post">
             <input type="text" name="name" class="required" placeholder="Bezeichnung des Themas"/>
             <input type="submit" value="Thema anlegen"/>
         </form>

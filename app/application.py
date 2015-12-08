@@ -119,11 +119,18 @@ class Application(object):
 
             if user is not None and user["password"] == kwargs["password"]:
                 cherrypy.session["user"] = user
-                return self.response(success=False, message="Du hast dich erfolgreich eingeloggt!", data={"user": user})
+                return self.response(success=True, message="Du hast dich erfolgreich eingeloggt!", data={"user": user})
         return self.response(success=False, message="Der login ist fehlgeschlagen!")
     login.exposed = True
 
     def response(self, success=False, path=None, message="", data=None):
+        if path is None:
+            if 'Referer' in cherrypy.request.headers:
+                path = cherrypy.request.headers['Referer']
+            else:
+                path = "/"
+        if data is None:
+            data = {}
         if self.is_ajax():
             if "render_template" in data:
                 data["html"] = self.template_engine.render(data["render_template"], **data)
@@ -131,7 +138,8 @@ class Application(object):
             return json.dumps({
                 "success": success,
                 "message": message,
-                "data": data
+                "data": data,
+                "redirect": path
             })
         Application.redirect(path, message)
 
@@ -323,11 +331,14 @@ class Application(object):
             "password": (Validator.EMPTY,)
         })
         if v.is_valid():
-            data = self.repository.create_user(
+            user = self.repository.create_user(
                 alias=kwargs["alias"],
                 role=kwargs["role"],
                 name=kwargs["name"],
                 password=kwargs["password"])
+            data = {
+                "user": user
+            }
             return self.response(True, message="Der Benutzer wurde erfolgreich angelegt!", data=data)
         return self.response(False, message=v.get_error_message())
     create_user.exposed = True
@@ -341,25 +352,31 @@ class Application(object):
         })
         if v.is_valid():
             if "password" in kwargs and kwargs["password"]:
-                data = self.repository.update_user(
+                user = self.repository.update_user(
                     alias=kwargs["alias"],
                     role=kwargs["role"],
                     name=kwargs["name"],
                     password=kwargs["password"])
             else:
-                data = self.repository.update_user(
+                user = self.repository.update_user(
                     alias=kwargs["alias"],
                     role=kwargs["role"],
                     name=kwargs["name"])
+            data = {
+                "user": user
+            }
             return self.response(True, message="Der Benutzer wurde erfolgreich bearbeitet!", data=data)
         return self.response(False, message=v.get_error_message())
     update_user.exposed = True
 
     def delete_user(self, **kwargs):
         Application.proof_admin()
-        if "alias" in kwargs and kwargs["alias"] and kwargs["alias"] == Repository.is_alias(kwargs["alias"]):
-            data = self.repository.delete_user(
+        if "alias" in kwargs and kwargs["alias"] and Repository.is_alias(kwargs["alias"]):
+            user = self.repository.delete_user(
                 alias=kwargs["alias"])
+            data = {
+                "user": user
+            }
             return self.response(True, "/users", "Der Benutzer wurde erfolgreich gelöscht!", data=data)
         return self.response(False, "/users", "Ein Benutzername ist erforderlich.")
     delete_user.exposed = True
