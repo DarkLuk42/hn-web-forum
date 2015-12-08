@@ -10,7 +10,7 @@
     %if user_role == "ADMIN":
         <ul class="inline">
             <li>
-                <form class="ajax" class="inline-form" action="/delete_discussion" method="post">
+                <form class="ajax inline-form" action="/delete_discussion" method="post">
                     <input type="hidden" name="theme" value="${theme['alias']}">
                     <input type="hidden" name="discussion" value="${discussion['alias']}"/>
                     <input class="btn-delete" type="submit" value="Diskussion löschen"/>
